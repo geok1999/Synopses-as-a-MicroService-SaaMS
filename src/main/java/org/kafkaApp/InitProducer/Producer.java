@@ -9,6 +9,10 @@ import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerializer;
 import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerializer;
 import org.kafkaApp.Structure.RequestStructure;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class Producer {
@@ -34,15 +38,7 @@ public class Producer {
 
         Properties properties = createConfiguration.getPropertiesConfig(DataStructureSerializer.class);
 
-
-        // Build the Producer multithreaded
-        //CreateTopic createTopic = new CreateTopic();
-        //createTopic.createMyTopic(topicName1, dataPath.length, replicateFactor);
-        //createTopic.createMyTopic(topicName2, dataPath.length, replicateFactor);
-
         Thread[] dispatchers = new Thread[dataPath.length];
-        //dispatchers[0] = new Thread(new ProducerDispatcher(properties2, topicName2, RequestPath1,RequestStructure.class,0));
-        //dispatchers[0].start();
         for (int i = 0; i < dataPath.length; i++) {
             int partition = i % EnvironmentConfiguration.giveTheParallelDegree();
             System.out.println("PARTITION I AM"+partition);
@@ -58,7 +54,7 @@ public class Producer {
         }
     }
     public static void main(String[] args)  {
-        int totalStocks=9;
+       /* int totalStocks=9;
         //stpcks Name for Forex
         String [] forexStocksNames = new String[totalStocks];
         forexStocksNames[0] = "Forex·EURTRY·NoExpiry.json";
@@ -75,18 +71,31 @@ public class Producer {
         forexStocksNames[10] = "Forex·EURAUD·NoExpiry.json";
         forexStocksNames[11] = "Forex·EURCAD·NoExpiry.json";*/
         //the data path of the data, wanted to send to the kafka
-        String subDataPath="C:\\dataset\\ForexStocks\\";
+       /* String subDataPath="C:\\dataset\\ForexStocks\\";
         String[] TotalDataPath=new String[totalStocks];
 
         for (int i = 0; i < forexStocksNames.length; i++) {
             TotalDataPath[i]=subDataPath + forexStocksNames[i];
+        }*/
+
+
+        File folder = new File(EnvironmentConfiguration.getFilePathForDataTopic());
+        FilenameFilter jsonFileFilter = (dir, name) -> name.endsWith(".json");
+        File[] files = folder.listFiles(jsonFileFilter);
+        List<String> forexStocksNamesList = new ArrayList<>();
+        if (files != null) {
+            for (File file : files) {
+                forexStocksNamesList.add(file.getAbsolutePath());
+            }
         }
+        String[] forexStocksNames = forexStocksNamesList.toArray(new String[0]);
+
 
         //the topic names
         String topicName1="Data_Topic";
         //properties of the producer
         Producer producer = new Producer();
-        producer.produceData(topicName1,TotalDataPath);
+        producer.produceData(topicName1,forexStocksNames);
 
 
     }

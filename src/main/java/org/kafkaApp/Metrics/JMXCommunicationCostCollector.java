@@ -44,7 +44,8 @@ public class JMXCommunicationCostCollector {
         //JMXCommunicationCostCollector collector = new JMXCommunicationCostCollector();
         //service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi
         // Add URLs as needed
-        collector.addUrl("service:jmx:rmi:///jndi/rmi://localhost:9998/jmxrmi");
+       // collector.addUrl("service:jmx:rmi:///jndi/rmi://snf-36110.ok-kno.grnetcloud.net:9999/jmxrmi");
+        collector.addUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
         manageServiceUrls();
         // Add more URLs as needed
         // urls.add(new JMXServiceURL("service:jmx:rmi:///jndi/rmi://another-host:another-port/jmxrmi"));
@@ -61,7 +62,7 @@ public class JMXCommunicationCostCollector {
                 // Construct the ObjectName for the MBean you want to access
 
 
-               //Double sensorValue1 = (Double) mbsc.getAttribute(mbeanNames, "finalSynopses-byte-count");
+              // Double sensorValue1 = (Double) mbsc.getAttribute(mbeanNames, "finalSynopses-byte-count");
                 Double sensorValue2 = (Double) mbsc.getAttribute(mbeanNames2, "InitSynopses-byte-count");
                // totalSensorValue1 += sensorValue1;
                 totalSensorValue2 += sensorValue2;

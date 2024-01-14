@@ -1,4 +1,4 @@
-package org.kafkaApp.InitProducer;
+package org.kafkaApp.ClassMaybeUsefull;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

@@ -8,10 +8,16 @@ import java.util.Properties;
 
 public class EnvironmentConfiguration {
     private static final Properties properties = new Properties();
-    private static final String Location_DIR_PATH = "/home/gkalfakis/Configuration/configCluster.properties";
+    private static final String Default_Location_DIR_PATH = "/home/gkalfakis/Configuration/configCluster.properties";
 
     static {
-        try (InputStream input = new FileInputStream(Location_DIR_PATH)) {
+        String final_Location_Path = System.getProperty("configFilePath");
+
+        if (final_Location_Path == null) {
+            final_Location_Path = Default_Location_DIR_PATH;
+        }
+
+        try (InputStream input = new FileInputStream(final_Location_Path)) {
             properties.load(input);
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,6 +51,12 @@ public class EnvironmentConfiguration {
     public static int giveTheReplicationFactor() {
         return Integer.parseInt(properties.getProperty("REPLICATION_FACTOR","3"));
     }
+    public static String getFilePathForDataTopic() {
+        return properties.getProperty("DATA_TOPIC_PATH","C:\\dataset\\ProduceDataToDataTopic");
+    }
+    public static String getFilePathForRequestTopic() {
+        return properties.getProperty("REQUEST_TOPIC_PATH","C:\\Request_small.json");
+    }
 
     public static String getFilePathForPropertiesfile() {
         return properties.getProperty("SAVE_FILE_PATH_PROPERTIES","C:\\dataset\\Configuration\\kafka-config.properties");
@@ -52,13 +64,5 @@ public class EnvironmentConfiguration {
     public static String TimeWaitToDoAdd() {
         return properties.getProperty("Batching_Time","2");
     }
-  //make a main
-    public static void main(String[] args) {
-        System.out.println(EnvironmentConfiguration.getBootstrapServers());
-        System.out.println(EnvironmentConfiguration.getFilePathPrefix());
-        System.out.println(EnvironmentConfiguration.getTempDir());
-        System.out.println(EnvironmentConfiguration.getZookeeperBoostrapServer());
-    }
-
 
 }

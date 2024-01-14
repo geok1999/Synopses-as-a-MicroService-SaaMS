@@ -1,0 +1,142 @@
+[
+    {
+        "streamID" : "EURTRY",
+        "synopsisID" : 1,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 6.05959, "price", "Queryable", "Continues", 0.002, 0.99, 12345 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001 
+    },
+    {
+        "streamID" : "EURTRY",
+        "synopsisID" : 2,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 0.69196, "price", "Queryable", "Continues", 0.002 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+    },
+    {
+        "streamID" : "EURTRY",
+        "synopsisID" : 3,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 6.05959, "price", "Queryable", "Continues", 150000, 0.01 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+    },
+    {
+        "streamID" : "EURTRY",
+        "synopsisID" : 4,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 0.69196, "price", "Queryable", "Continues", 1, 500, 2000, 8 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+    },
+    {
+        "streamID" : "EURTRY",
+        "synopsisID" : 5,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0.69196, "CountEstimation" ], "price", "Queryable", "Continues", 0.001 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 5,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0.001, "FrequentItems" ], "price", "Queryable", "Continues", 0.001 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 6,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0.95272, "CountEstimation" ], "price", "Queryable", "Continues", 0.001, 1.0E-4, 0.001 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 6,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0.001, "FrequentItems" ], "price", "Queryable", "Continues", 0.001, 1.0E-4, 0.001 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 6,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 100, "isFrequent" ], "price", "Queryable", "Continues", 0.001, 1.0E-4, 0.001 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 7,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0.95272, "CountEstimation" ], "price", "Queryable", "Continues", 10, 10000 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 7,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ [ 0, "L2norm" ], "price", "Queryable", "Continues", 10, 10000 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 8,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 0.5, "price", "Queryable", "Continues", 0.01 ],
+        "partition" : 0,
+        "noOfP" : 1,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 9,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 0, "price", "Queryable", "Continues", 100,500,20 ],
+        "partition" : 0,
+        "noOfP" : 4,
+        "uid" : 1001
+      },
+      {
+        "streamID" : "EURTRY",
+        "synopsisID" : 10,
+        "requestID" : 1,
+        "dataSetKey" : "Forex",
+        "param" : [ 0.5, "price", "Queryable", "Continues", 0.01,180000],
+        "partition" : 0,
+        "noOfP" : 1,
+        "uid" : 1001
+      }
+]

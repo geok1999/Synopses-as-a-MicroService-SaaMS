@@ -9,33 +9,78 @@ import javax.management.remote.JMXServiceURL;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class JMXMetricsCollector {
+    private static final int STANDARD_PERIOD=5;
+    private static int period = 0;
+    private static List<JMXServiceURL> serviceUrls = new ArrayList<>();
+
 
     public static void main(String[] args) throws Exception {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the case name:");
+        String fileName = scanner.nextLine();
+
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+
+        //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36110.ok-kno.grnetcloud.net:9999/jmxrmi");
+        //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36112.ok-kno.grnetcloud.net:9999/jmxrmi");
+        //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36103.ok-kno.grnetcloud.net:9999/jmxrmi");
+        addServiceUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
+
+        //manageServiceUrls();
 
         // Schedule the task to run every 1 minute
         executorService.scheduleAtFixedRate(() -> {
             try {
-                collectMetricsAndWriteToFile();
+                collectMetricsAndWriteToFile(fileName,period);
+                period += STANDARD_PERIOD;
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }, 0, 10, TimeUnit.SECONDS);
+        }, 0, STANDARD_PERIOD, TimeUnit.SECONDS);
     }
 
-    private static void collectMetricsAndWriteToFile() throws Exception {
-        List<JMXServiceURL> serviceUrls = new ArrayList<>();
-        serviceUrls.add(new JMXServiceURL("service:jmx:rmi:///jndi/rmi://snf-36110.ok-kno.grnetcloud.net:9999/jmxrmi"));
-        serviceUrls.add(new JMXServiceURL("service:jmx:rmi:///jndi/rmi://snf-36112.ok-kno.grnetcloud.net:9999/jmxrmi"));
+    public static void manageServiceUrls() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter 1 to add a URL or 2 to remove a URL or anything else to stop this process:");
+        int choice = scanner.nextInt();
+        scanner.nextLine();  // Consume newline left-over
+        System.out.println("Enter the URL:");
+        String url = scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                addServiceUrl(url);
+                System.out.println("URL added successfully.");
+                break;
+            case 2:
+                removeServiceUrl(url);
+                System.out.println("URL removed successfully.");
+                break;
+            default:
+                System.out.println("Invalid choice.");
+                break;
+        }
+    }
+
+    public static void addServiceUrl(String url) throws Exception {
+        serviceUrls.add(new JMXServiceURL(url));
+    }
+
+    public static void removeServiceUrl(String url) throws Exception {
+        JMXServiceURL serviceURL = new JMXServiceURL(url);
+        serviceUrls.remove(serviceURL);
+    }
+    private static void collectMetricsAndWriteToFile(String fileName, int period) throws Exception {
+        //List<JMXServiceURL> serviceUrls = new ArrayList<>();
 
         double totalProcessRate = 0;
         double totalAvgLatency = 0;
@@ -76,13 +121,13 @@ public class JMXMetricsCollector {
         }
         String runId = UUID.randomUUID().toString();
 
-        String result = "Run ID: " + runId + "\n" +
+        String result = "Period: " + period + "-" + (period+STANDARD_PERIOD) + "\n"+
                 "Total Process Rate: " + totalProcessRate + "\n" +
                 "Total Average Latency: " + totalAvgLatency + "\n" +
-                "Total Max Latency: " + totalMaxLatency + "\n";
+                "Total Max Latency: " + totalMaxLatency + "\n"+ "\n";
 
         // Write the result to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\dataset\\MetricsResults\\metrics.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/home/gkalfakis/MetricsFolder/"+fileName+".txt", true))) {
             writer.write(result);
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,7 +147,7 @@ public class JMXMetricsCollector {
                 Double maxLatency = (Double) mbsc.getAttribute(mbeanName, "process-latency-max");
                 aggregatedMaxLatency = Math.max(aggregatedMaxLatency, maxLatency);  // We take the maximum latency across all threads.
 
-                System.out.println("Process Rate for " + mbeanName + ": " + processRate);
+                //System.out.println("Process Rate for " + mbeanName + ": " + processRate);
                 //System.out.println("Average Latency for " + mbeanName + ": " + avgLatency);
                 //System.out.println("Max Latency for " + mbeanName + ": " + maxLatency);
             } catch (AttributeNotFoundException e) {
@@ -112,37 +157,3 @@ public class JMXMetricsCollector {
         return  new MetricsTable(aggregatedRate, aggregatedAvgLatency, aggregatedMaxLatency);
     }
 }
-/*
- public static void main(String[] args) throws Exception {
-        JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi");
-        try (JMXConnector jmxc = JMXConnectorFactory.connect(url, null)) {
-            MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
-
-            ObjectName queryNameRouter = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=router-microservice-*");
-            ObjectName queryNameSynopsis = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=synopsis*microservice-*");
-
-            Set<ObjectName> mbeanNamesRouter = mbsc.queryNames(queryNameRouter, null);
-            Set<ObjectName> mbeanNamesSynopsis = mbsc.queryNames(queryNameSynopsis, null);
-
-            CompletableFuture<Double> routerFuture = aggregateThroughputAsync(mbsc, mbeanNamesRouter);
-            CompletableFuture<Double> synopsisFuture = aggregateThroughputAsync(mbsc, mbeanNamesSynopsis);
-
-            double totalProcessRate = routerFuture.thenCombine(synopsisFuture, Double::sum).get();
-
-            System.out.println("Total Process Rate: " + totalProcessRate);
-        }
-    }
-
-    private static CompletableFuture<Double> aggregateThroughputAsync(MBeanServerConnection mbsc, Set<ObjectName> mbeanNames) {
-        return CompletableFuture.supplyAsync(() -> {
-            return mbeanNames.parallelStream().mapToDouble(mbeanName -> {
-                try {
-                    return (Double) mbsc.getAttribute(mbeanName, "process-rate");
-                } catch (Exception e) {
-                    System.out.println("Error fetching process rate for " + mbeanName + ": " + e.getMessage());
-                    return 0.0;
-                }
-            }).sum();
-        });
-    }
- */
