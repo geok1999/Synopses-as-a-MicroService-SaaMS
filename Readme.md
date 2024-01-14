@@ -53,17 +53,18 @@ DATA_TOPIC_PATH = C:\\dataset\\ProduceDataToDataTopic
 In case of configCluster.properties file is not found, the application will use these default values.
 
 # List of Available Synopsis
-| Synopsis ID | Synopsis       | Estimate             | Mostly Used       | Parameters                                                    |
-|-------------|----------------|----------------------|-------------------|---------------------------------------------------------------|
-| 1           | CountMin       | Count                | Frequent Itemsets | epsilon, confidence, seed                                     |
-| 2           | HyperLogLog    | Cardinality          | Cardinality       | rsd (relative standard deviation)                             |
-| 3           | BloomFilter    | Member of a Set      | Membership        | numberOfElements, maxFalsePositive                            |
-| 4           | DFT            | Fourier Coefficients | Spectral Analysis | intervalSec, basicWindowSize, slidingWindowSize, coefficients |
-| 5           | LossyCounting  | Count, FrequentItems | Frequent Itemsets | epsilon (the maximum error)                                   |
-| 6           | StickySampling | Count, FrequentItems | Frequent Itemsets | support, epsilon, probabilityOfFailure                        |
-| 7           | AMS            | L2 norm, Count       | Frequent Itemsets | depth, buckets                                                |
-| 8           | GKQuantiles    | Quantile             | Quantiles         | epsilon (the maximum error)                                   |
-
+| Synopsis ID | Synopsis                | Estimate                       | Mostly Used       | Parameters                                                    |
+|-------------|-------------------------|--------------------------------|-------------------|---------------------------------------------------------------|
+| 1           | CountMin                | Count                          | Frequent Itemsets | epsilon, confidence, seed                                     |
+| 2           | HyperLogLog             | Cardinality                    | Cardinality       | rsd (relative standard deviation)                             |
+| 3           | BloomFilter             | Member of a Set                | Membership        | numberOfElements, maxFalsePositive                            |
+| 4           | DFT                     | Fourier Coefficients           | Spectral Analysis | intervalSec, basicWindowSize, slidingWindowSize, coefficients |
+| 5           | LossyCounting           | Count, FrequentItems           | Frequent Itemsets | epsilon (the maximum error)                                   |
+| 6           | StickySampling          | Count, FrequentItems           | Frequent Itemsets | support, epsilon, probabilityOfFailure                        |
+| 7           | AMS                     | L2 norm, Count                 | Frequent Itemsets | depth, buckets                                                |
+| 8           | GKQuantiles             | Quantile                       | Quantiles         | epsilon (the maximum error)                                   |
+| 9           | LSH                     | Binary Representation of a Set | Correlation       | slidingwindow(W),compresion(D), workersnum(B)                 |
+| 10          | WindowSketch Quantiles  | Quantile                       | Quantiles         | epsilon (the maximum error),windowSize                        |
 
 # User Interface Application
 In SaaMS, interaction is carried out through a user interface application. The user interface application is a Java application can produce messages in Kafka topics. There are two main types of messages can handle: **Data Messages** and **Request Messages**.

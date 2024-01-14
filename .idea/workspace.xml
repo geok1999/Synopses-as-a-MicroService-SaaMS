@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-Readme.md imported for better&#10;-small changes in functionality of code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/EnvironmentConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/EnvironmentConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/DataStructureCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/DataStructureCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/Producer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerQueryLoadReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerToAddTheSameData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/RunRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/RunRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/HelpCheckThreads.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXCommunicationCostCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXCommunicationCostCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollectorCheckConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,13 +31,16 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2ataewWeUMNagxZsTVULmZDZ1uc" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Producer.executor": "Run",
     "Application.RouterMicroservice.executor": "Run",
     "Application.RunRequest.executor": "Run",
@@ -76,7 +69,7 @@
       <recent name="C:\Users\kalfa\IntaleJworkspace\ClusterProjects\SaaMS_APP\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Producer">
+  <component name="RunManager" selected="Application.RunRequestQuery">
     <configuration name="Producer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.kafkaApp.InitProducer.Producer" />
       <module name="SaaMS_APP" />
@@ -142,11 +135,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RunRequestQuery" />
         <item itemvalue="Application.Producer" />
         <item itemvalue="Application.RunRequest" />
         <item itemvalue="Application.RouterMicroservice" />
         <item itemvalue="Batch.RunAllScripts" />
-        <item itemvalue="Application.RunRequestQuery" />
       </list>
     </recent_temporary>
   </component>
@@ -169,11 +162,25 @@
       <workItem from="1705140431036" duration="1034000" />
       <workItem from="1705141511957" duration="13076000" />
       <workItem from="1705161179165" duration="1300000" />
-      <workItem from="1705223537738" duration="10714000" />
+      <workItem from="1705223537738" duration="11399000" />
     </task>
+    <task id="LOCAL-00001" summary="-Readme.md imported for better&#10;-small changes in functionality of code">
+      <option name="closed" value="true" />
+      <created>1705242475150</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705242475150</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="-Readme.md imported for better&#10;-small changes in functionality of code" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Readme.md imported for better&#10;-small changes in functionality of code" />
   </component>
 </project>
