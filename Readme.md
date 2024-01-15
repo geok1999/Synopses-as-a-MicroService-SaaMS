@@ -143,6 +143,14 @@ In SaaMS, interaction is carried out through a user interface application. The u
 - **uid (Integer):** [Optional - not used in the provided example.]
 
 An example of how to use for each type of Synopsis the query and not query Request Message exist in the `RequestExamples` file.
+## Output Message
+The result of this estimation is written on an output Kafka topic with the name `OutputTopicSynopsis_(the synopsisid)`.
+The representation of the messages that the output topic can contain is presented below:
+```console
+For Stock EURTRY and Dataset Forex
+Estimate Count in the price field of value: 6.05959
+Count Min Result is: 37
+```
 
 # Getting Started
 ## Prerequisites:
@@ -175,8 +183,8 @@ java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Pro
 ```
 java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
 ```
-The -DconfigFilePath=C:\dataset\Configuration\config.properties is optional. If it is not set, the application will use the default values to configure the App.
+The `-DconfigFilePath=C:\dataset\Configuration\config.properties` is optional and the file path `C:\dataset\Configuration\config.properties` used as example. If it is not set, the application will use the default values to configure the App.
 
 # Contact
 If you have any questions, please contact me at
-`gkafakis@tuc.gr`
+`gkalfakis@tuc.gr`

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-Readme.md imported for better&#10;-small changes in functionality of code">
+    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-Update Readme.md synopsis table">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/GenericSynopsesMicroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/GenericSynopsesMicroService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +23,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -50,7 +50,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kalfa/IntaleJworkspace/ClusterProjects/SaaMS_APP/src/main/java/org/kafkaApp",
+    "last_opened_file_path": "C:/Users/kalfa/IntaleJworkspace/ClusterProjects/SaaMS_APP",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,7 +69,7 @@
       <recent name="C:\Users\kalfa\IntaleJworkspace\ClusterProjects\SaaMS_APP\src\main\java" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RunRequestQuery">
+  <component name="RunManager" selected="Application.Producer">
     <configuration name="Producer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.kafkaApp.InitProducer.Producer" />
       <module name="SaaMS_APP" />
@@ -135,8 +135,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunRequestQuery" />
         <item itemvalue="Application.Producer" />
+        <item itemvalue="Application.RunRequestQuery" />
         <item itemvalue="Application.RunRequest" />
         <item itemvalue="Application.RouterMicroservice" />
         <item itemvalue="Batch.RunAllScripts" />
@@ -162,7 +162,8 @@
       <workItem from="1705140431036" duration="1034000" />
       <workItem from="1705141511957" duration="13076000" />
       <workItem from="1705161179165" duration="1300000" />
-      <workItem from="1705223537738" duration="11399000" />
+      <workItem from="1705223537738" duration="12622000" />
+      <workItem from="1705308399034" duration="4995000" />
     </task>
     <task id="LOCAL-00001" summary="-Readme.md imported for better&#10;-small changes in functionality of code">
       <option name="closed" value="true" />
@@ -172,7 +173,31 @@
       <option name="project" value="LOCAL" />
       <updated>1705242475150</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="-Update Readme.md synopsis table">
+      <option name="closed" value="true" />
+      <created>1705243014615</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705243014615</updated>
+    </task>
+    <task id="LOCAL-00003" summary="-Update Readme.md synopsis table">
+      <option name="closed" value="true" />
+      <created>1705243082464</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705243082464</updated>
+    </task>
+    <task id="LOCAL-00004" summary="-Update Readme.md synopsis table">
+      <option name="closed" value="true" />
+      <created>1705243456466</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705243456466</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +206,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="-Readme.md imported for better&#10;-small changes in functionality of code" />
-    <option name="LAST_COMMIT_MESSAGE" value="-Readme.md imported for better&#10;-small changes in functionality of code" />
+    <MESSAGE value="-Update Readme.md synopsis table" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Update Readme.md synopsis table" />
   </component>
 </project>

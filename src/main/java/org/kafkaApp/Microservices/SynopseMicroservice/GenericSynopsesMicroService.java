@@ -184,8 +184,8 @@ public class GenericSynopsesMicroService {
                 .filter((key, value) -> value != null);
 
 
-        KStream<String, SynopsisAndParameters> subSynopses = builder.stream(intermidiateTopicName, Consumed.with(Serdes.String(), new SynopsisAndParametersSerde()))
-                .transform(()->new TotalOutputTopicTransformer("finalSynopses-byte-count",synopsesType));
+        KStream<String, SynopsisAndParameters> subSynopses = builder.stream(intermidiateTopicName, Consumed.with(Serdes.String(), new SynopsisAndParametersSerde()));
+               // .transform(()->new TotalOutputTopicTransformer("finalSynopses-byte-count",synopsesType));
 
         KTable<String,RequestStructure> queryTableMeged = queryReqStream
                 .toTable(Materialized.with(Serdes.String(),new RequestStructureSerde()));
