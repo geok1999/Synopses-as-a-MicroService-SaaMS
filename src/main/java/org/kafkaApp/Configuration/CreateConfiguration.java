@@ -22,7 +22,7 @@ public class CreateConfiguration {
             properties.put(StreamsConfig.REPLICATION_FACTOR_CONFIG, EnvironmentConfiguration.giveTheReplicationFactor()); // replication factor 2 this means that we have 2 replicas for each partition and distributed alongside the brokers
             properties.put(StreamsConfig.STATE_DIR_CONFIG, EnvironmentConfiguration.getTempDir() + UUID.randomUUID().toString()); // state directory for storing the state of the kafka streams
            //ForTesting temporary disable
-            properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
+            //properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
             return properties;
 
        // } catch (IOException e) {
@@ -91,7 +91,7 @@ public class CreateConfiguration {
         //properties.put("buffer.memory", 10);  // Wait up to 10 ms for additional messages
 
         //temporary disable
-        properties.put("compression.type", "gzip");  // Enable compression
+        //properties.put("compression.type", "gzip");  // Enable compression
 
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", valueSerializerClass.getName());

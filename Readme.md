@@ -186,5 +186,8 @@ java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Pro
 The `-DconfigFilePath=C:\dataset\Configuration\config.properties` is optional and the file path `C:\dataset\Configuration\config.properties` used as example. If it is not set, the application will use the default values to configure the App.
 
 # Contact
-If you have any questions, please contact me at
-`gkalfakis@tuc.gr`
+If you have any questions, please contact us at:
+* gkalfakis@tuc.gr
+* ngiatrakos@tuc.gr
+
+

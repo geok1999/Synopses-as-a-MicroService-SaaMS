@@ -26,6 +26,7 @@ import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerde;
 import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerializer;
 import org.kafkaApp.Serdes.Init.RequestStructure.RequestStructureSerde;
 import org.kafkaApp.Serdes.Init.RequestWithMetaDataParameters.RequestWithMetaDataParametersSerde;
+import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisSerializer;
 import org.kafkaApp.Structure.DataStructure;
 import org.kafkaApp.Structure.RequestStructure;
 import org.kafkaApp.Structure.StructureWithMetaDataParameters;
@@ -110,8 +111,9 @@ public class RouterMicroservice {
         Properties properties2 = createConfiguration.getPropertiesConfig(ListRequestStructureSerializer.class);
         Properties properties3 = createConfiguration.getPropertiesConfig(DataStructureSerializer.class);
         Properties properties4 = createConfiguration.getPropertiesConfig(StringSerializer.class);
+        Properties properties5 = createConfiguration.getPropertiesConfig(SynopsisSerializer.class);
 
-        LoadAndSaveSynopsis loadSynopsis = new LoadAndSaveSynopsis(properties4,replicateFactor);
+        LoadAndSaveSynopsis loadSynopsis = new LoadAndSaveSynopsis(properties5,replicateFactor);
 
 
         final String  InstanceStatusTopicName = "InstanceStatus_Topic";
@@ -149,11 +151,12 @@ public class RouterMicroservice {
             createTopic.createMyCompactTopic("OutputTopicSynopsis"+2, 1, replicateFactor); //synopsisID=2
             createTopic.createMyCompactTopic("OutputTopicSynopsis"+3, 1, replicateFactor); //synopsisID=3
             createTopic.createMyCompactTopic("OutputTopicSynopsis"+4, 1, replicateFactor); //synopsisID=4
-           /* for(int i=1; i<=EnvironmentConfiguration.giveTheParallelDegree(); i++) {
-                String intermidiateTopicName = "Intermidiate_Multy_Thread_Tpic"+"_"+i;
-                createTopic.createMyCompactTopic(intermidiateTopicName, 1, 3);
-            }*/
-
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+5, 1, replicateFactor); //synopsisID=5
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+6, 1, replicateFactor); //synopsisID=6
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+7, 1, replicateFactor); //synopsisID=7
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+8, 1, replicateFactor); //synopsisID=8
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+9, 1, replicateFactor); //synopsisID=9
+            createTopic.createMyCompactTopic("OutputTopicSynopsis"+10, 1, replicateFactor); //synopsisID=10
         }
 
         KStream<String, Tuple2Dem<List<RequestStructure>, String>> copyOfRequest = builder1.stream(reqTopicName, Consumed.with(Serdes.String(), new ListRequestStructureSerde()))
@@ -166,24 +169,24 @@ public class RouterMicroservice {
                 .mapValues((key,value)->{
                     int countOfCurrentInstances = Integer.parseInt(value.getValue2());
                     if(countOfCurrentInstances<=1 || value.getValue1().get(0).getParam()[2].equals("Queryable")){//|| countOfCurrentInstances>value.getValue1().get(0).getNoOfP()){// allagh if(countOfCurrentInstances<=1 || countOfCurrentInstances>value.getValue1().get(0).getNoOfP()){// allagh
-                        System.out.println("mpenei edw Sthn Sinthiki?? " +  key+","+value);
+                       // System.out.println("mpenei edw Sthn Sinthiki?? " +  key+","+value);
                         return null;
                     }
 
-                    System.out.println("mpenei edw " + key+","+value);
+                    //System.out.println("mpenei edw " + key+","+value);
                     return value;
                 })
                 .filter(((key, value) -> value!=null))
                 .mapValues((key,value)->{
                     try (KafkaProducer<String, List<RequestStructure>> kafkaProducer = new KafkaProducer<>(properties2)) {
                         int whichPartitionSetUp = (Integer.parseInt(value.getValue2())-1)%EnvironmentConfiguration.giveTheParallelDegree();
-                        System.out.println("whichPartitionSetUp: "+whichPartitionSetUp);
+                       // System.out.println("whichPartitionSetUp: "+whichPartitionSetUp);
                         kafkaProducer.send(new ProducerRecord<>(reqTopicName,whichPartitionSetUp, key, value.getValue1()));
                     }
                     return value;
                 });
 
-        copyOfRequest.peek((key, value) -> System.out.println("keyForCoppy: "+key+" ,value: "+value.getValue1().get(0).getRequestID()+","+value.getValue2()));
+       // copyOfRequest.peek((key, value) -> System.out.println("keyForCoppy: "+key+" ,value: "+value.getValue1().get(0).getRequestID()+","+value.getValue2()));
 
         CustomGenericStreamPartitioner<StructureWithMetaDataParameters<RequestStructure>> partitioner = new CustomGenericStreamPartitioner<>(StructureWithMetaDataParameters::getMetaData3, 3);
 
@@ -204,7 +207,7 @@ public class RouterMicroservice {
                 .branch((key, value) -> !value.getParam()[0].equals("LOAD_REQUEST"),Branched.as("Normal"))
                 .defaultBranch();
 
-        consumedRequest.get("Request-Normal").peek((key, value) -> System.out.println("keyRouterReq: "+key+" ,value: "+value.getRequestID()+","+value.getParam()[2]));
+        //consumedRequest.get("Request-Normal").peek((key, value) -> System.out.println("keyRouterReq: "+key+" ,value: "+value.getRequestID()+","+value.getParam()[2]));
         KTable<String, StructureWithMetaDataParameters<RequestStructure>> createdMicroservicesTable = loadSynopsis.loadRequestedSynopsis(consumedRequest.get("Request-LOAD"))
                 .merge(consumedRequest.get("Request-Normal"))
                 .groupByKey(Grouped.with(Serdes.String(), new RequestStructureSerde()))
@@ -251,13 +254,13 @@ public class RouterMicroservice {
 
                     System.out.println("topicCountNum: "+topicCount);
                     String reqTopicName = "ReqTopicSynopsis"+"_"+topicCount;
-
+                    System.out.println("What is the key:"+key);
 
                     int numPartitions = value.getReq().getNoOfP();
                    // int numOfTotalInstances = leaderElection.getActiveInstanceCount();
                    // int numOfThreads=(int) Math.ceil((double) numPartitions /numOfTotalInstances);
 
-                    System.out.println("getMetaData3: "+value.getMetaData3());
+                    //System.out.println("getMetaData3: "+value.getMetaData3());
                     if(value.getMetaData3()<=1 || value.getReq().getParam()[2].equals("Queryable")) {//prosorino veltiosi
 
                             try (KafkaProducer<String, RequestStructure> kafkaProducer = new KafkaProducer<>(properties2)) {

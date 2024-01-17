@@ -18,6 +18,8 @@ import org.kafkaApp.Partitioners.CustomGenericStreamPartitioner;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerde;
 import org.kafkaApp.Serdes.Init.EstimationResult.EstimationResultSerde;
 import org.kafkaApp.Serdes.Init.RequestStructure.RequestStructureSerde;
+import org.kafkaApp.Serdes.Init.Tuple2Dem.KTableMergejoinTuple2DemSerde;
+import org.kafkaApp.Serdes.Init.Tuple2Dem.LoadTupleTuple2demSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesAndRequest.SynopsisAndRequestSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisAndParameters.SynopsisAndParametersSerde;
@@ -135,6 +137,7 @@ public class GenericSynopsesMicroService {
         builder.build().addStateStore(synopsesStoreBuilder);
         builder.build().addStateStore(synopsesTableStoreBuilder);
         builder.build().addStateStore(estimateSynopsesStoreBuilder);
+        KTable<String, Synopsis> loadedSynopsisInst = builder.table(this.LOAD_TOPIC_NAME, Consumed.with(Serdes.String(), new SynopsesSerdes()));
 
         Map<String, KStream<String, RequestStructure>> processReqBranch = builder.stream(reqTopicName, Consumed.with(Serdes.String(), new RequestStructureSerde()))
                 .split(Named.as("Request-"))
@@ -192,7 +195,7 @@ public class GenericSynopsesMicroService {
 
        // merged Synopsis and DFT
         KTable<String, SynopsisAndParameters> mergedSynopses = subSynopses.filter((key, value) -> mergedSynopsesControrler)
-                .transform(() -> new WindowAggregatorForMergeTransformer(Duration.ofSeconds(20),"SynopsisTable-State-Store",numThreads),"SynopsisTable-State-Store")
+                .transform(() -> new WindowAggregatorForMergeTransformer(Duration.ofSeconds(20),"SynopsisTable-State-Store",numThreads,keyBuild,synopsesType),"SynopsisTable-State-Store")
                 .merge(subSynopses.filter((key,value)->value.getSynopsis().getSynopsesID()==4 || value.getSynopsis().getSynopsesID()==9))
                 .selectKey((key, value) -> {
                     String[] splitKey = key.split(",");
@@ -200,12 +203,99 @@ public class GenericSynopsesMicroService {
                 }).toTable(Materialized.with(Serdes.String(),new SynopsisAndParametersSerde()));
 
 
+        KTable<String, SynopsisAndParameters> totalSynopsisTable  = mergedSynopses.outerJoin(loadedSynopsisInst, Tuple2Dem::new)
+                .mapValues((key, value) -> {
+                        if (value.getValue1() == null) {
+                          // Build a synopsis and parameter value to estiamte for load synopsis
+                            String[] synopsesParameters = value.getValue2().getSynopsisDetails().split(",");
+                            // Preparing parameters for SynopsisAndParameters
+                            Object[] parameters = new Object[7];
+                            parameters[0] = synopsesParameters[0]; // requestID
+                            parameters[1] = synopsesParameters[1]; // partitionID
+                            parameters[2] = Integer.parseInt(synopsesParameters[2]); // numberOfProcId
+                            parameters[3] = synopsesParameters[3]; // field
+                            parameters[4] = synopsesParameters[4]; // uid
+                            parameters[5] = synopsesParameters[5]; // streamID
+                            parameters[6] = synopsesParameters[6]; // DataSetKey
+                            return new SynopsisAndParameters(value.getValue2(),parameters,0);
+
+                        } else if (value.getValue2() == null) {
+                            // return the current synopsis and parameter value to estimate original synopsis
+                            return value.getValue1();
+                        } else {
+                            // do a merge and return the merged synopsis and parameter to estimate the total synopsis
+                            Synopsis synopsisInst = null;
+                            synopsisInst =   value.getValue1().getSynopsis().merge(value.getValue2());
+                            synopsisInst.setSynopsesID(value.getValue2().getSynopsesID());
+                            synopsisInst.setSynopsisDetails(value.getValue2().getSynopsisDetails());
+                            synopsisInst.setSynopsisParameters(value.getValue2().getSynopsisParameters());
+                            return new SynopsisAndParameters(synopsisInst,value.getValue1().getParameters(),0);
+                        }
+                },Materialized.with(Serdes.String(), new SynopsisAndParametersSerde()));
+
         KTable<String, Tuple2Dem<RequestStructure, SynopsisAndParameters>> joinedTableMergableSynopsis =queryTableMeged .join(
-                mergedSynopses,leftValue -> leftValue.getStreamID()+","+leftValue.getDataSetKey(),
+                totalSynopsisTable,leftValue -> leftValue.getStreamID()+","+leftValue.getDataSetKey(),
                 Tuple2Dem::new
         );
+
+       /* KTable<String, Tuple2Dem<RequestStructure, SynopsisAndParameters>> joinedTableMergableSynopsis =queryTableMeged .join(
+                mergedSynopses,leftValue -> leftValue.getStreamID()+","+leftValue.getDataSetKey(),
+                Tuple2Dem::new,Materialized.with(Serdes.String(), new KTableMergejoinTuple2DemSerde())
+        );
+
+        joinedTableMergableSynopsis.toStream().peek((key,value)->System.out.println("before Loaded Synopsis"+key));
+
+        /* KTable<String,Tuple2Dem<Tuple2Dem<RequestStructure, SynopsisAndParameters>,Synopsis>> joinedTableMergableWithLoadSynopsis = joinedTableMergableSynopsis
+                .join(loadedSynopsisInst, Tuple2Dem::new,Materialized.with(Serdes.String(),new LoadTupleTuple2demSerde()));
+
+        joinedTableMergableWithLoadSynopsis.toStream().peek((key,value)->System.out.println("Loaded Synopsis"+key));
+       /* KTable<String,String> estimationMergedSynopsis =  joinedTableMergableWithLoadSynopsis.mapValues((key,value)->{
+                    Object data = value.getValue1().getValue1().getParam()[0];
+                    Synopsis synopsisInst = null;
+                    if(value.getValue2()==null)
+                        synopsisInst = value.getValue1().getValue2().getSynopsis();
+                    else if(value.getValue1()==null){
+                        System.out.println("--------------------------------------------------------------------------------------");
+                        System.out.println(defineEstimationSynopsis(value.getValue1().getValue1(), value.getValue2(), data));
+                        System.out.println("--------------------------------------------------------------------------------------");
+
+                    }
+                    else {
+                        synopsisInst =   value.getValue1().getValue2().getSynopsis().merge(value.getValue2());
+                    }
+
+
+                     int requestId = value.getValue1().getValue1().getRequestID(); // Assuming you have a method to get request ID
+                    AtomicLong adhocCounter = adhocCounters.computeIfAbsent(requestId, k -> new AtomicLong(0));
+
+                    if(adhocCounter.get()>1 && value.getValue1().getValue1().getParam()[3].equals("Ad-hoc")){
+                        return null;
+                    }
+                    adhocCounter.incrementAndGet();
+                    System.out.println("adhoc:"+adhocCounter.get());
+                    String fieldParameter = (String) value.getValue1().getValue1().getParam()[1];
+                    LoadAndSaveSynopsis loadAndSaveSynopsis = new LoadAndSaveSynopsis();
+
+
+                    String synopsesMessage=null;
+
+
+
+                    synopsesMessage = defineEstimationSynopsis(value.getValue1().getValue1(), synopsisInst, data);
+
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    System.out.println(synopsesMessage);
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    return synopsesMessage;
+                })
+                .filter((key, value) -> value != null);
+
+         */
+
         ConcurrentHashMap<Integer, AtomicLong> adhocCounters = new ConcurrentHashMap<>();
-        KTable<String,String> estimationMergedSynopsis = joinedTableMergableSynopsis.mapValues((key,value)->{
+        KTable<String,String> estimationMergedSynopsis = joinedTableMergableSynopsis
+               // .leftJoin(loadedSynopsisInst, Tuple2Dem::new)
+                .mapValues((key,value)->{
                     Synopsis synopsisInst = value.getValue2().getSynopsis();
                      int requestId = value.getValue1().getRequestID(); // Assuming you have a method to get request ID
                     AtomicLong adhocCounter = adhocCounters.computeIfAbsent(requestId, k -> new AtomicLong(0));

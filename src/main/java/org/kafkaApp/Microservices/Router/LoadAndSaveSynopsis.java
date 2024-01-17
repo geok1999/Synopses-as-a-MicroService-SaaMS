@@ -4,6 +4,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
+import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.KStream;
 import org.kafkaApp.Configuration.CreateTopic;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
@@ -36,6 +37,8 @@ public class LoadAndSaveSynopsis {
     private final String  StickySamplingtopicName = "LoadStickySamplingSynopses_Topic";
     private final String  AMSSketchtopicName = "LoadAMSSketchSynopses_Topic";
     private final String  GKQuantilestopicName = "LoadGKQuantilesSynopses_Topic";
+    private final String  LSHtopicName = "LoadLSHSynopses_Topic";
+    private final String  WindowSketchQuantilestopicName = "LoadWindowSketchQuantilesSynopses_Topic";
 
     public LoadAndSaveSynopsis(){
     }
@@ -51,10 +54,14 @@ public class LoadAndSaveSynopsis {
         createTopic.createMyCompactTopic(StickySamplingtopicName, 1, replicateFactor);
         createTopic.createMyCompactTopic(AMSSketchtopicName, 1, replicateFactor);
         createTopic.createMyCompactTopic(GKQuantilestopicName, 1, replicateFactor);
+        createTopic.createMyCompactTopic(GKQuantilestopicName, 1, replicateFactor);
+        createTopic.createMyCompactTopic(GKQuantilestopicName, 1, replicateFactor);
+        createTopic.createMyCompactTopic(LSHtopicName, 1, replicateFactor);
+        createTopic.createMyCompactTopic(WindowSketchQuantilestopicName, 1, replicateFactor);
     }
 
     public KStream<String, RequestStructure> loadRequestedSynopsis(KStream<String, RequestStructure> requestStream) {
-        requestStream
+        KStream<String, RequestStructure> requestStream2 =requestStream
                 .map(((key, value) -> {
                     try {
                         Path path = Paths.get(value.getParam()[1].toString());
@@ -121,57 +128,60 @@ public class LoadAndSaveSynopsis {
                             throw new RuntimeException("Unknown synopsis type in file: " + fileName);
                         }
 
-                        String[] splitParams = loadedSynopsis.getSynopsisDetails().split(",");
-                        String streamID = splitParams[0];
-                        String dataSetKey = splitParams[1];
-                        String synopsisID = splitParams[2];
-                        String field = splitParams[3];
-                        String uid = splitParams[4];
-                        String noOfP = splitParams[5];
-                        loadedSynopsis.setSynopsisDetails(streamID + "," + dataSetKey + "," + synopsisID + "," + field + "," + uid + "," + noOfP + "," + value.getRequestID());
-                        String newKey = streamID + "," + dataSetKey + "," + synopsisID + "," + field;
-                        value.setStreamID(splitParams[0]);
-                        value.setDataSetKey(splitParams[1]);
 
+                        String[] splitParams = loadedSynopsis.getSynopsisDetails().split(",");
+                        String streamID = splitParams[5];
+                        String dataSetKey = splitParams[6];
+                        int synopsisID = loadedSynopsis.getSynopsesID();
+                        String field = splitParams[3];
+                        int uid = Integer.parseInt(splitParams[4]);
+                        String noOfP = splitParams[2];
+                        int requstID = Integer.parseInt(splitParams[0]);
+
+                        String newKey = streamID + "," + dataSetKey + "," + synopsisID + "," + field;
+
+                        value.setStreamID(streamID);
+                        value.setDataSetKey(dataSetKey);
                         value.setSynopsisID(loadedSynopsis.getSynopsesID());
                         value.setParam(new Object[]{"LOAD_REQUEST", field, "NotQueryable", loadedSynopsis.getSynopsisParameters()});
                         value.setNoOfP(Integer.parseInt(noOfP));
-                        value.setUid(Integer.parseInt(uid));
+                        value.setUid(uid);
+                        value.setRequestID(requstID);
+
                         try (KafkaProducer<String, Synopsis> kafkaProducerLoad = new KafkaProducer<>(properties4)) {
-                            kafkaProducerLoad.send(new ProducerRecord<>(loadTopicName, newKey, loadedSynopsis)); //value1 is the data
+                            kafkaProducerLoad.send(new ProducerRecord<>(loadTopicName, streamID + "," + dataSetKey, loadedSynopsis)); //value1 is the data
                         }
-                        return new org.apache.kafka.streams.KeyValue<>(newKey, value);
+
+                        return new KeyValue<>(newKey, value);
                     } catch (IOException e) {
                         throw new RuntimeException("Error reading Synopsis object from disk", e);
                     }
                 }));
-        return requestStream;
+
+        return requestStream2;
 
     }
 
-    public void saveSynopsisToFile(Synopsis synopsis, int topicCount,String synopsisType) {
-        long lastSaved = 0;  // Initialize lastSaved to 0
-        long saveInterval = 60000;  // Set saveInterval to 60000 milliseconds (10 sec)
+    public void saveSynopsisToFile(Synopsis synopsis, String keyOfSynopsis,String synopsisType) {
+        String filename = EnvironmentConfiguration.getFilePathPrefix() + synopsisType+"_"+ keyOfSynopsis + ".ser";
 
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastSaved > saveInterval) {
-            String filename = EnvironmentConfiguration.getFilePathPrefix() + synopsisType + topicCount + ".ser";
+        try (SynopsesSerdes synopsesSerdes = new SynopsesSerdes();
+             FileOutputStream fileOut = new FileOutputStream(filename);
+             DataOutputStream dataOut = new DataOutputStream(fileOut)) {
 
-            try (SynopsesSerdes synopsesSerdes = new SynopsesSerdes();
-                 FileOutputStream fileOut = new FileOutputStream(filename);
-                 DataOutputStream dataOut = new DataOutputStream(fileOut)) {
+            Serializer<Synopsis> serializer = synopsesSerdes.serializer();
+            byte[] serializedData = serializer.serialize("", synopsis);
+            dataOut.write(serializedData);
+            System.out.println("Synopsis object has been written to " + filename);
 
-                Serializer<Synopsis> serializer = synopsesSerdes.serializer();
-                byte[] serializedData = serializer.serialize("", synopsis);
-                dataOut.write(serializedData);
-                System.out.println("Synopsis object has been written to " + filename);
 
-                lastSaved = currentTime; // Update the last saved time
-            } catch (IOException e) {
-                // Log the error or re-throw it as a runtime exception
-                throw new RuntimeException("Error writing Synopsis object to disk", e);
-            }
+        } catch (IOException e) {
+            // Log the error or re-throw it as a runtime exception
+            throw new RuntimeException("Error writing Synopsis object to disk", e);
         }
+
+
+
     }
 
 }

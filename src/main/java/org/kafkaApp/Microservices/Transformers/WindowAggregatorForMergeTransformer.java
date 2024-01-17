@@ -5,6 +5,7 @@ import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.processor.PunctuationType;
 import org.apache.kafka.streams.state.KeyValueStore;
+import org.kafkaApp.Microservices.Router.LoadAndSaveSynopsis;
 import org.kafkaApp.Structure.SynopsisAndParameters;
 import org.kafkaApp.Synopses.Synopsis;
 
@@ -20,11 +21,16 @@ public class WindowAggregatorForMergeTransformer implements Transformer<String, 
     private String newKey;
     private String oldKey;
     private int partitionNum;
-    public WindowAggregatorForMergeTransformer(Duration duration, String stateStoreName,int partitionNum) {
+    private String keyOfSynopsis;
+    private String SynopsisType;
+    private LoadAndSaveSynopsis loadAndSaveSynopsis;
+    public WindowAggregatorForMergeTransformer(Duration duration, String stateStoreName,int partitionNum,String keyOfSynopsis,String SynopsisType) {
         this.durationMillis = duration.toMillis();
         this.stateStoreName = stateStoreName;
         this.partitionNum = partitionNum;
-
+        this.loadAndSaveSynopsis = new LoadAndSaveSynopsis();
+        this.keyOfSynopsis=keyOfSynopsis;
+        this.SynopsisType=SynopsisType;
     }
 
 
@@ -65,6 +71,7 @@ public class WindowAggregatorForMergeTransformer implements Transformer<String, 
 
                 if (merged != null) {
                     context.forward(newKey, merged);
+                    loadAndSaveSynopsis.saveSynopsisToFile(merged.getSynopsis(),keyOfSynopsis,SynopsisType);
                     newKey = null;  // Reset newKey after forwarding.
                 }
             }
