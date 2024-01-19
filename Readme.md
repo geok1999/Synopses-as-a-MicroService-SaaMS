@@ -7,6 +7,7 @@
     - [Data Message format](#data-message-format)
     - [Request message for adding a new Synopsis](#request-message-for-adding-a-new-synopsis)
     - [Request message for query a Synopsis](#request-message-for-query-a-synopsis)
+    - [Output Message](#output-message)
 5. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [How Execute SaaMS](#how-execute-saams)
@@ -17,8 +18,7 @@
 6. [Contact](#contact)
 # SaaMS : Synopses as a Microservice
 ## Abstract
-In this work, we are developing the functionality and implementation of Synopses as a MicroService (SaaMS). The SaaMS is an application designed for real time stream processing and analyses in high volume data. It is built within the ecosystem of Apache Kafka and utilizes the Kafka Streams framework. The SaaMS also contains a library with Synopses that is used for producing summarization analysis. In that it contributes (a) an innovative architecture to gain scalability dynamically based on the necessary computation requirements, (b) maintaining a large volume of Synopsis at the same time with high throughput and fault-tolerance, (c) providing an extensible Synopsis library (d) practical evaluation providing summarizations using real data. The SaaMS manages large-scale stream processing and analysis because it enables (i) horizontal scalability, i.e., taking advantage of complicated mechanisms that Kafka has for distributing the workload, achieving maximum throughput and minimum latency (ii) vertical scalability, i.e., the use of Synopses library allows execution with fewer resources in less time because of its structure (iii) federated scalability, i.e., data has the ability to be processed across multiple distributed environments which is often geographically dispersed.
-
+In this work, we introduce a novel stream summary maintenance paradigm in the form of distributed microservices, namely Synopses as a MicroService, and we implement this paradigm on top of Apache Kafka and Kafka Streams Microservices. SaaMS is designed for real-time stream summarization and analysis over rapid data streams. SaaMS also contains a built-in library with Synopses that is used for producing stream summaries but remains extensible and customizable to new Synopses techniques. In that, (a) it contributes an innovative architecture to gain scalability dynamically based on the necessary computation requirements, (b) maintains a large volume of Synopses, concurrently with high throughput and fault-tolerance, (c) provides an extensible Synopsis library for real-time analysis (d) experimental evaluation provided using real financial data. SaaMS manages large-scale stream processing and analysis because it enables (i) horizontal scalability, i.e., taking advantage of complicated mechanisms that Kafka has for distributing the workload, achieving maximum throughput and minimum latency (ii) vertical scalability, i.e., the ability to scale the computation with the number of processed streams (iii) federated scalability, i.e., data can be processed across multiple distributed environments even in case they are geographically dispersed.
 # Configuration SaaMS before execution:
 For the application to function properly, the following parameters must be set in the config.properties file.
 
@@ -143,6 +143,14 @@ In SaaMS, interaction is carried out through a user interface application. The u
 - **uid (Integer):** [Optional - not used in the provided example.]
 
 An example of how to use for each type of Synopsis the query and not query Request Message exist in the `RequestExamples` file.
+## Load Request Message from a file
+The functionality of loading a saved Synopsis from disc, in practice, can be implemented using the following request:
+```json
+{
+  "param" : [ "LOAD_REQUEST", "PathToLoadSynopsis\\stored_CountMin.ser" ]
+}
+```
+The `LOAD_REQUEST` is a keyword that indicates that the request is for loading a Synopsis from disc. The `PathToLoadSynopsis` is the path where the serialized file of the Synopsis is stored.
 ## Output Message
 The result of this estimation is written on an output Kafka topic with the name `OutputTopicSynopsis_(the synopsisid)`.
 The representation of the messages that the output topic can contain is presented below:
