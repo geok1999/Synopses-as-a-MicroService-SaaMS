@@ -20,35 +20,66 @@
 ## Abstract
 In this work, we introduce a novel stream summary maintenance paradigm in the form of distributed microservices, namely Synopses as a MicroService, and we implement this paradigm on top of Apache Kafka and Kafka Streams Microservices. SaaMS is designed for real-time stream summarization and analysis over rapid data streams. SaaMS also contains a built-in library with Synopses that is used for producing stream summaries but remains extensible and customizable to new Synopses techniques. In that, (a) it contributes an innovative architecture to gain scalability dynamically based on the necessary computation requirements, (b) maintains a large volume of Synopses, concurrently with high throughput and fault-tolerance, (c) provides an extensible Synopsis library for real-time analysis (d) experimental evaluation provided using real financial data. SaaMS manages large-scale stream processing and analysis because it enables (i) horizontal scalability, i.e., taking advantage of complicated mechanisms that Kafka has for distributing the workload, achieving maximum throughput and minimum latency (ii) vertical scalability, i.e., the ability to scale the computation with the number of processed streams (iii) federated scalability, i.e., data can be processed across multiple distributed environments even in case they are geographically dispersed.
 # Configuration SaaMS before execution:
-For the application to function properly, the following parameters must be set in the config.properties file.
+For the application to function properly, the following parameters must be set in the config.properties file. 
 
-```properties
-# Determine the Kafka Broker
-BOOTSTRAP_SERVERS = localhost:9092
+1. Following is an example of the config.properties file as must implement in case of running the application in a Windows environment.
+    ```properties
+    # Determine the Kafka Broker
+    BOOTSTRAP_SERVERS = localhost:9092,localhost:9093,localhost:9094
+    
+    # Determine the path for saving synopsis instance files
+    SAVE_FILE_PATH_PREFIX = C:\\dataset\\StoreSynopses\\stored_
+    
+    # Determine the path for saving Kafka Streams files
+    KAFKA_STREAM_DIR = C:\\dataset\\tmp\\kafka-streams\\
+    
+    # Determine the Zookeeper server
+    ZOOKEEPER_BOOTSTRAP_SERVERS = localhost:2181
+    
+    # Determine the number of parallel threads in Router Microservice
+    PARALLEL_DEGREE = 8
+    
+    # Determine the replication factor of Kafka topics
+    REPLICATION_FACTOR = 3
+    
+    # Determine the time (sec) for batching messages of data to add this in synopsis
+    Batching_Time = 5
+    # Determine the REQUEST_PATH and DATA_PATH
+    # which is responsible for producing the request and data messages to Request and Data Kafka topics in SaaMS
+    REQUEST_TOPIC_PATH = C:\\Request_small.json
+    DATA_TOPIC_PATH = C:\\dataset\\ProduceDataToDataTopic
+    ```
+2. Following is an example of the config.properties file as must implement in case of running the application in a Linux environment.
+    ```properties
+    # Determine the Kafka Broker
+    BOOTSTRAP_SERVERS = localhost:9092,localhost:9093,localhost:9094
+    
+    # Determine the path for saving synopsis instance files
+    SAVE_FILE_PATH_PREFIX = /home/user1/dataset/StoreSynopses/stored_
+    
+    # Determine the path for saving Kafka Streams files
+    KAFKA_STREAM_DIR = /home/user1/dataset/tmp/kafka-streams/
+    
+    # Determine the Zookeeper server
+    ZOOKEEPER_BOOTSTRAP_SERVERS = localhost:2181
+    
+    # Determine the number of parallel threads in Router Microservice
+    PARALLEL_DEGREE = 8
+    
+    # Determine the replication factor of Kafka topics
+    REPLICATION_FACTOR = 3
+    
+    # Determine the time (sec) for batching messages of data to add this in synopsis
+    Batching_Time = 5
+    
+    # Determine the REQUEST_PATH and DATA_PATH
+    # which is responsible for producing the request and data messages to Request and Data Kafka topics in SaaMS
+    REQUEST_TOPIC_PATH = /home/user1/Request_small.json
+    DATA_TOPIC_PATH = /home/user1/dataset/ProduceDataToDataTopic
+    ```
+3. In case of running the application in a cluster environment, the config.properties file must be set in all the nodes of the cluster.
 
-# Determine the path for saving synopsis instance files
-SAVE_FILE_PATH_PREFIX = C:\\dataset\\StoreSynopses\\stored_
-
-# Determine the path for saving Kafka Streams files
-KAFKA_STREAM_DIR = C:\\dataset\\tmp\\kafka-streams\\
-
-# Determine the Zookeeper server
-ZOOKEEPER_BOOTSTRAP_SERVERS = localhost:2181
-
-# Determine the number of parallel threads in Router Microservice
-PARALLEL_DEGREE = 6
-
-# Determine the replication factor of Kafka topics
-REPLICATION_FACTOR = 1
-
-# Determine the time (sec) for batching messages of data to add this in synopsis
-Batching_Time = 5
-# Determine the REQUEST_TOPIC_PATH and DATA_TOPIC_PATH
-# which is responsible for producing the request and data messages to Request and Data Kafka topics in SaaMS
-REQUEST_TOPIC_PATH = C:\\Request_small.json
-DATA_TOPIC_PATH = C:\\dataset\\ProduceDataToDataTopic
-```
-In case of configCluster.properties file is not found, the application will use these default values.
+4. In case of config.properties file is not found, the application will use default values as describe in  config.properties.
 
 # List of Available Synopsis
 | Synopsis ID | Synopsis                | Estimate                         | Mostly Used       | Parameters                                                    |

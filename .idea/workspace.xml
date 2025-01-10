@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="- Add save/Load functionality">
+      <change afterPath="$PROJECT_DIR$/Configuration/config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Configuration/configLinuxEnv.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Configuration/configWindowsEnv.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Configuration/kafka-config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
     </list>
@@ -23,6 +27,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "geok1999"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/geok1999/Synopses-as-a-MicroService-SaaMS.git",
+    "accountId": "46c93d39-fd8d-41c3-9f75-cab1bbf8fb4a"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -37,30 +53,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Producer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RouterMicroservice.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunRequest.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunRequestQuery.executor&quot;: &quot;Run&quot;,
-    &quot;Batch.RunAllScripts.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kalfa/IntaleJworkspace/kafka_Project_Parallelism3_6_0_EkdosiKafka2.8&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Producer.executor": "Run",
+    "Application.RouterMicroservice.executor": "Run",
+    "Application.RunRequest.executor": "Run",
+    "Application.RunRequestQuery.executor": "Run",
+    "Batch.RunAllScripts.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/SpringBootWorkSpace/Synopses-as-a-MicroService-SaaMS/Configuration",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kalfa\IntaleJworkspace\ClusterProjects\SaaMS_APP\src\main\java\org\kafkaApp" />
@@ -148,8 +166,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-1.8.0_392-corretto-1.8.0_392-f644763e9732-f719d367" />
-        <option value="jdk-19.0.2-corretto-19.0.2-f644763e9732-1e16d6ec" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
       </set>
     </attachedChunks>
   </component>
@@ -171,6 +189,7 @@
       <workItem from="1705441514105" duration="186000" />
       <workItem from="1705501448178" duration="7230000" />
       <workItem from="1705677436889" duration="357000" />
+      <workItem from="1736518585534" duration="1386000" />
     </task>
     <task id="LOCAL-00001" summary="-Readme.md imported for better&#10;-small changes in functionality of code">
       <option name="closed" value="true" />

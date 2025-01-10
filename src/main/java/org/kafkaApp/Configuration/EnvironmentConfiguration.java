@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class EnvironmentConfiguration {
     private static final Properties properties = new Properties();
-    private static final String Default_Location_DIR_PATH = "/home/gkalfakis/Configuration/configCluster.properties";
+    private static final String Default_Location_DIR_PATH = "D:\\SpringBootWorkSpace\\Synopses-as-a-MicroService-SaaMS\\Configuration\\config.properties";
 
     static {
         String final_Location_Path = System.getProperty("configFilePath");
