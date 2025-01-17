@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.entities;
 
 public class RequestStructure {
     private String streamID;

@@ -2,7 +2,7 @@ package org.kafkaApp.Serdes.Init.RequestStructure;
 
 
 import org.kafkaApp.Serdes.GeneralFormat.GeneralDeserializer;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 public class RequestStructureDeserializer extends GeneralDeserializer<RequestStructure> {
 

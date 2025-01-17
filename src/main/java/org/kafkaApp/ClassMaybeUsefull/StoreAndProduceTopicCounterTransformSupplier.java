@@ -7,8 +7,8 @@ import org.apache.kafka.streams.kstream.ValueTransformerWithKeySupplier;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.state.KeyValueStore;
 import org.kafkaApp.Configuration.CreateTopic;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.StructureWithMetaDataParameters;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.dto.StructureWithMetaDataParameters;
 
 import java.util.Properties;
 

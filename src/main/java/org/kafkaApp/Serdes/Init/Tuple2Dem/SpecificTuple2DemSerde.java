@@ -1,9 +1,9 @@
 package org.kafkaApp.Serdes.Init.Tuple2Dem;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.StructureWithMetaDataParameters;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.dto.StructureWithMetaDataParameters;
 
 
 public class SpecificTuple2DemSerde extends Tuple2DemSerde<DataStructure, StructureWithMetaDataParameters<RequestStructure>> {

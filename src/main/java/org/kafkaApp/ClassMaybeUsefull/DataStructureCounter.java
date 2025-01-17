@@ -10,8 +10,8 @@ import org.kafkaApp.Configuration.EnvironmentConfiguration;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureDeserializer;
 import org.kafkaApp.Serdes.Init.ListDataStructure.ListDataStructureDeserializer;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisAndParameters.SynopsisAndParametersDeserializer;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 import java.time.Duration;
 import java.util.*;

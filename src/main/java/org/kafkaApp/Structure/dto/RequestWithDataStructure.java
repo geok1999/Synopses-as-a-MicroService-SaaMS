@@ -1,5 +1,8 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
+
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 public class RequestWithDataStructure{
     private RequestStructure requestWithSynopsesStructure;

@@ -1,12 +1,9 @@
 package org.kafkaApp.Serdes.Init.Tuple2Dem;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.apache.kafka.common.serialization.Serdes;
-import org.apache.kafka.streams.kstream.Materialized;
 import org.kafkaApp.Serdes.GeneralFormat.GeneralSerde;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.SynopsisAndParameters;
-import org.kafkaApp.Structure.Tuple2Dem;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.Tuple2Dem;
 import org.kafkaApp.Synopses.Synopsis;
 
 

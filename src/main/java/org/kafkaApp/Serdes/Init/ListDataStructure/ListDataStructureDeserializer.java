@@ -3,7 +3,7 @@ package org.kafkaApp.Serdes.Init.ListDataStructure;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.kafkaApp.Serdes.GeneralFormat.GeneralDeserializer;
-import org.kafkaApp.Structure.DataStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
 
 import java.util.List;
 

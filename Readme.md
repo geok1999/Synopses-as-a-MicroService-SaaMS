@@ -15,7 +15,8 @@
         - [Step 2: Build the JAR](#step-2-build-the-jar)
         - [Step 3: Run the SaaMS JAR](#step-3-run-the-saams-jar)
         - [Step 4: Run the User interface JAR](#step-4-run-the-user-interface-jar)
-6. [Contact](#contact)
+6. [Annex1: How to use transform data script](#annex-how-to-use-transform-data-script)
+7. [Contact](#contact)
 # SaaMS : Synopses as a Microservice
 ## Abstract
 In this work, we introduce a novel stream summary maintenance paradigm in the form of distributed microservices, namely Synopses as a MicroService, and we implement this paradigm on top of Apache Kafka and Kafka Streams Microservices. SaaMS is designed for real-time stream summarization and analysis over rapid data streams. SaaMS also contains a built-in library with Synopses that is used for producing stream summaries but remains extensible and customizable to new Synopses techniques. In that, (a) it contributes an innovative architecture to gain scalability dynamically based on the necessary computation requirements, (b) maintains a large volume of Synopses, concurrently with high throughput and fault-tolerance, (c) provides an extensible Synopsis library for real-time analysis (d) experimental evaluation provided using real financial data. SaaMS manages large-scale stream processing and analysis because it enables (i) horizontal scalability, i.e., taking advantage of complicated mechanisms that Kafka has for distributing the workload, achieving maximum throughput and minimum latency (ii) vertical scalability, i.e., the ability to scale the computation with the number of processed streams (iii) federated scalability, i.e., data can be processed across multiple distributed environments even in case they are geographically dispersed.
@@ -223,6 +224,47 @@ java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Pro
 java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
 ```
 The `-DconfigFilePath=C:\dataset\Configuration\config.properties` is optional and the file path `C:\dataset\Configuration\config.properties` used as example. If it is not set, the application will use the default values to configure the App.
+
+# Annex 1: How to use transform data script
+The `transform_data.jar` is a Java application that can be used to transform a txt file to a JSON file. The JSON file can be used to produce data messages to the Data Kafka topic in SaaMS.
+## How to use the transform data script
+### Step 1: Must have a txt file with the following file name format:
+```
+\<Market Type\>·\<Unique Identifier\>·\<Suffix\>
+```
+This is necessary to extract:
+- **streamID**: Extracted from the second component (the unique identifier).
+- **dataSetKey**: Extracted from the first component (the market type).
+### Step 2: Each line of the txt file must have the following format:
+```
+\<Date\>,\<Time\>,\<Price\>,\<Volume\>
+```
+### Step 3: Run the transform data script and provide the path of stock market where the txt file is located
+```
+java -DconfigFilePath="C:\\custom\\dataset\\path\\" -jar target/Transform-TXT-Data-To-Json.jar 
+```
+# Annex 2: How to establish a Kafka Cluster and a Zookeeper Server which is necessary for execute SaaMS
+In this project provides two methods to establish a Kafka Cluster and a Zookeeper Server:
+1. Method 1: Using a Script
+   1. Download and install the Kafka and Zookeeper from the official website 
+   2. In project Script folder, there are two scripts:
+      - `RunAllScripts.cmd` for Windows
+      - `RunAllScripts.sh` for Linux
+   3. Before execute the scripts check if the file paths that you install kafka are the same in the scripts.
+   4. Execute the script.
+2. Method 2: Using Docker
+   1. In the project, there is a docker-compose file that can be used to establish a Kafka Cluster and a Zookeeper Server.
+   2. Run the following command:
+      ``` shell
+      docker-compose up
+      ```
+   3. To stop the Kafka Cluster and Zookeeper Server, run the following command:
+      ``` shell
+      docker-compose down
+      ```
+In both methods, the Kafka Cluster and Zookeeper Server will be established in the following ports:
+- Kafka Broker: 9092, 9093, 9094
+- Zookeeper: 2181
 
 # Contact
 If you have any questions, please contact us at:

@@ -4,7 +4,7 @@ import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.kafkaApp.Metrics.ByteCountingSensor;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 public class TotalOutputTopicTransformer implements Transformer<String, SynopsisAndParameters, KeyValue<String, SynopsisAndParameters>> {
     private ProcessorContext context;

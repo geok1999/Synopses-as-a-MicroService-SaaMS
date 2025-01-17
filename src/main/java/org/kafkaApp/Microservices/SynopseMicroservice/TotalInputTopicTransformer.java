@@ -4,7 +4,7 @@ import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.kafkaApp.Metrics.ByteCountingSensor;
-import org.kafkaApp.Structure.DataStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

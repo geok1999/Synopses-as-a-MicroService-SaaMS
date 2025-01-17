@@ -1,6 +1,7 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
 
+import org.kafkaApp.Structure.entities.RequestStructure;
 import org.kafkaApp.Synopses.Synopsis;
 
 public class SynopsisAndRequest {

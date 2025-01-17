@@ -74,6 +74,27 @@
                             <finalName>Producing-TO-REQUEST-TOPIC</finalName>
                         </configuration>
                     </execution>
+
+                    <!-- Configuration for the Transform-TXT-Data-To-Json JAR -->
+                    <execution>
+                        <id>make-assembly-converter</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>org.kafkaApp.convertingData.TransformTxtFilesIntoJsons</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>Transform-TXT-Data-To-Json</finalName>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
 

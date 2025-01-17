@@ -6,7 +6,7 @@ import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.processor.PunctuationType;
 import org.apache.kafka.streams.state.KeyValueStore;
 import org.kafkaApp.Microservices.Router.LoadAndSaveSynopsis;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 import org.kafkaApp.Synopses.Synopsis;
 
 import java.time.Duration;

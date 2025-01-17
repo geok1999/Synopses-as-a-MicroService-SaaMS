@@ -7,7 +7,7 @@ import org.kafkaApp.InitProducer.ProducerScript.ProducerDispatcher;
 import org.kafkaApp.InitProducer.ProducerScript.RealTimeProduceData;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerializer;
 import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerializer;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.io.File;
 import java.io.FilenameFilter;
