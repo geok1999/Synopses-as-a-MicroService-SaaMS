@@ -3,7 +3,7 @@ package org.kafkaApp.Serdes.SynopsesSerdes.SynopsisAndParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

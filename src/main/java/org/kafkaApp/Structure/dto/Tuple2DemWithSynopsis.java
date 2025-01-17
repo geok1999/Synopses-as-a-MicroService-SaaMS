@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
 import org.kafkaApp.Synopses.Synopsis;
 

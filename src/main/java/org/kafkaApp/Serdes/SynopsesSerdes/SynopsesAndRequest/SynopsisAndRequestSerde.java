@@ -6,8 +6,8 @@ import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 import org.kafkaApp.Serdes.Init.RequestStructure.RequestStructureSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.SynopsisAndRequest;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.dto.SynopsisAndRequest;
 
 import java.nio.ByteBuffer;
 

@@ -3,7 +3,7 @@ package org.kafkaApp.Serdes.Init.RequestWithDataStructure;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.kafkaApp.Serdes.GeneralFormat.GeneralSerde;
-import org.kafkaApp.Structure.RequestWithDataStructure;
+import org.kafkaApp.Structure.dto.RequestWithDataStructure;
 
 
 

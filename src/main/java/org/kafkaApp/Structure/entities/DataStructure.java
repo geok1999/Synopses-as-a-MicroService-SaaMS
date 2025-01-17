@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.entities;
 
 public class DataStructure {
     private String streamID;
@@ -10,6 +10,15 @@ public class DataStructure {
     private int volume;
 
     public DataStructure() {}
+
+    public DataStructure(String streamID, String dataSetKey, String date, String time, double price, int volume) {
+        this.streamID = streamID;
+        this.dataSetKey = dataSetKey;
+        this.date = date;
+        this.time = time;
+        this.price = price;
+        this.volume = volume;
+    }
 
     public DataStructure(String streamID, String objectID, String dataSetKey, String date, String time, double price, int volume) {
         this.dataSetKey = dataSetKey;

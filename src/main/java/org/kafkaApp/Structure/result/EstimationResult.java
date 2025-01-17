@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.result;
 
 public class EstimationResult {
     private String estimationVal;

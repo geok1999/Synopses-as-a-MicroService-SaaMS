@@ -6,8 +6,8 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerializer;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

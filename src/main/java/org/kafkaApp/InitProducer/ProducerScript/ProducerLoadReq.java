@@ -3,7 +3,7 @@ package org.kafkaApp.InitProducer.ProducerScript;
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.CreateTopic;
 import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerializer;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.util.Properties;
 

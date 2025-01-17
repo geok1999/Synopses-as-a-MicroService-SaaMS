@@ -1,4 +1,4 @@
-package org.kafkaApp.transformBigData;
+package org.kafkaApp.util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

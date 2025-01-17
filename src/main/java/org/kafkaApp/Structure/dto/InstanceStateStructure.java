@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
 public class InstanceStateStructure {
     private String instanceNameId;

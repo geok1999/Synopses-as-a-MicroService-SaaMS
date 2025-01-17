@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
 public class Tuple2Dem<A, B> {
     private  A value1;

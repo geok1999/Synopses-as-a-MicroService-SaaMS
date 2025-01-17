@@ -2,7 +2,7 @@ package org.kafkaApp.Serdes.Init.RequestStructure;
 
 
 import org.kafkaApp.Serdes.GeneralFormat.GeneralSerde;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 public class RequestStructureSerde extends GeneralSerde<RequestStructure> {
 

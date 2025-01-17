@@ -12,7 +12,7 @@ import org.kafkaApp.Serdes.SynopsesSerdes.BloomFilter.BloomFilterSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.CountMin.CountMinSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.HyperLogLog.HyperLogLogSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 import org.kafkaApp.Synopses.BloomFilter.BloomFilterSynopsis;
 import org.kafkaApp.Synopses.CountMin;
 import org.kafkaApp.Synopses.HyperLogLog.HyperLogLogSynopsis;

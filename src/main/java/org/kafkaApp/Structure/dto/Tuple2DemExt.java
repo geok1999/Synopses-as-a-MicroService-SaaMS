@@ -1,4 +1,4 @@
-package org.kafkaApp.Structure;
+package org.kafkaApp.Structure.dto;
 
 public class Tuple2DemExt <A, B> extends Tuple2Dem<A, B>{
     private String isProcessed;

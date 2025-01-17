@@ -6,7 +6,7 @@ import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serializer;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

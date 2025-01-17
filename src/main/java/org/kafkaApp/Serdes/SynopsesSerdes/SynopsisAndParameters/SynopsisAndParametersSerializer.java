@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.serialization.Serializer;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 import java.nio.ByteBuffer;
 

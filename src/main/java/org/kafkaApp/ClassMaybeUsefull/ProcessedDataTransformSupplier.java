@@ -4,7 +4,11 @@ import org.apache.kafka.streams.kstream.ValueTransformerWithKey;
 import org.apache.kafka.streams.kstream.ValueTransformerWithKeySupplier;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.state.KeyValueStore;
-import org.kafkaApp.Structure.*;
+import org.kafkaApp.Structure.dto.StructureWithMetaDataParameters;
+import org.kafkaApp.Structure.dto.Tuple2Dem;
+import org.kafkaApp.Structure.dto.Tuple2DemExt;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,7 @@ import java.util.List;
 public class ProcessedDataTransformSupplier implements ValueTransformerWithKeySupplier<String, Tuple2Dem<List<DataStructure>, StructureWithMetaDataParameters<RequestStructure>>, Tuple2DemExt<List<DataStructure>,StructureWithMetaDataParameters<RequestStructure>>> {
 
 
-    private static class ProcessedDataTransform implements ValueTransformerWithKey<String, Tuple2Dem<List<DataStructure>,StructureWithMetaDataParameters<RequestStructure>>, Tuple2DemExt<List<DataStructure>,StructureWithMetaDataParameters<RequestStructure>>> {
+    private static class ProcessedDataTransform implements ValueTransformerWithKey<String, Tuple2Dem<List<DataStructure>, StructureWithMetaDataParameters<RequestStructure>>, Tuple2DemExt<List<DataStructure>,StructureWithMetaDataParameters<RequestStructure>>> {
         private KeyValueStore<String, List<String>> stateStore;
 
         @Override

@@ -5,10 +5,10 @@ import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.apache.kafka.streams.processor.PunctuationType;
 import org.apache.kafka.streams.state.KeyValueStore;
-import org.kafkaApp.Structure.EstimationResult;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.SynopsisAndParameters;
-import org.kafkaApp.Structure.Tuple2Dem;
+import org.kafkaApp.Structure.result.EstimationResult;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.Tuple2Dem;
 import org.streaminer.stream.frequency.util.CountEntry;
 
 import java.time.Duration;

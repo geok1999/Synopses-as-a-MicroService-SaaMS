@@ -18,12 +18,14 @@ import org.kafkaApp.Partitioners.CustomGenericStreamPartitioner;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerde;
 import org.kafkaApp.Serdes.Init.EstimationResult.EstimationResultSerde;
 import org.kafkaApp.Serdes.Init.RequestStructure.RequestStructureSerde;
-import org.kafkaApp.Serdes.Init.Tuple2Dem.KTableMergejoinTuple2DemSerde;
-import org.kafkaApp.Serdes.Init.Tuple2Dem.LoadTupleTuple2demSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesAndRequest.SynopsisAndRequestSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsesSerdes;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisAndParameters.SynopsisAndParametersSerde;
-import org.kafkaApp.Structure.*;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
+import org.kafkaApp.Structure.dto.SynopsisAndRequest;
+import org.kafkaApp.Structure.dto.Tuple2Dem;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.result.EstimationResult;
 import org.kafkaApp.Synopses.Synopsis;
 import org.streaminer.stream.frequency.util.CountEntry;
 

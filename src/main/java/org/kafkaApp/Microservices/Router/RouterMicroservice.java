@@ -27,10 +27,10 @@ import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSeriali
 import org.kafkaApp.Serdes.Init.RequestStructure.RequestStructureSerde;
 import org.kafkaApp.Serdes.Init.RequestWithMetaDataParameters.RequestWithMetaDataParametersSerde;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisSerializer;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.RequestStructure;
-import org.kafkaApp.Structure.StructureWithMetaDataParameters;
-import org.kafkaApp.Structure.Tuple2Dem;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
+import org.kafkaApp.Structure.dto.StructureWithMetaDataParameters;
+import org.kafkaApp.Structure.dto.Tuple2Dem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

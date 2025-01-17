@@ -1,8 +1,8 @@
-package org.kafkaApp;
+package org.kafkaApp.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.io.FileWriter;
 import java.io.IOException;

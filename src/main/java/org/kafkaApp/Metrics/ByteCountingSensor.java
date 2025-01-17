@@ -9,8 +9,8 @@ import org.apache.kafka.streams.kstream.ValueTransformerSupplier;
 import org.apache.kafka.streams.processor.ProcessorContext;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerializer;
 import org.kafkaApp.Serdes.SynopsesSerdes.SynopsisAndParameters.SynopsisAndParametersSerializer;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.SynopsisAndParameters;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.dto.SynopsisAndParameters;
 
 import java.util.HashMap;
 import java.util.Map;

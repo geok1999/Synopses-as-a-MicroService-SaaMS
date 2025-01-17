@@ -1,7 +1,7 @@
 package org.kafkaApp.Partitioners;
 
 import org.apache.kafka.streams.processor.StreamPartitioner;
-import org.kafkaApp.Structure.DataStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;

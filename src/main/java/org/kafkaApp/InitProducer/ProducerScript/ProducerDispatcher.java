@@ -3,8 +3,8 @@ package org.kafkaApp.InitProducer.ProducerScript;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.kafkaApp.Structure.DataStructure;
-import org.kafkaApp.Structure.RequestStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
+import org.kafkaApp.Structure.entities.RequestStructure;
 
 import java.io.File;
 import java.io.IOException;

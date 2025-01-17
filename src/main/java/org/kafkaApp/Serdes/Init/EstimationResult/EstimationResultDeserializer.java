@@ -2,7 +2,7 @@ package org.kafkaApp.Serdes.Init.EstimationResult;
 
 
 import org.kafkaApp.Serdes.GeneralFormat.GeneralDeserializer;
-import org.kafkaApp.Structure.EstimationResult;
+import org.kafkaApp.Structure.result.EstimationResult;
 
 
 public class EstimationResultDeserializer extends GeneralDeserializer<EstimationResult> {

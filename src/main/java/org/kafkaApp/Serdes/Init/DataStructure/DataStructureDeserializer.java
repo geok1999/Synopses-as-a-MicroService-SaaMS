@@ -2,7 +2,7 @@ package org.kafkaApp.Serdes.Init.DataStructure;
 
 
 import org.kafkaApp.Serdes.GeneralFormat.GeneralDeserializer;
-import org.kafkaApp.Structure.DataStructure;
+import org.kafkaApp.Structure.entities.DataStructure;
 
 
 public class DataStructureDeserializer extends GeneralDeserializer<DataStructure> {
