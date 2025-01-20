@@ -16,6 +16,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.CreateTopic;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
+import org.kafkaApp.Metrics.newMetricsClass.ConfigMetrics;
 import org.kafkaApp.Microservices.SynopseMicroservice.GenericSynopsesMicroService;
 import org.kafkaApp.Microservices.SynopseMicroservice.RawDataMicroService;
 import org.kafkaApp.Partitioners.CustomGenericStreamPartitioner;
@@ -46,7 +47,6 @@ import java.util.stream.IntStream;
 public class RouterMicroservice {
 
     //configuration of Router Microservice
-
     private static final String MICROSERVICE_ID = "router-microservice";
     private final  static int replicateFactor = EnvironmentConfiguration.giveTheReplicationFactor();
     private static final String BOOTSTRAP_SERVERS = EnvironmentConfiguration.getBootstrapServers();//"localhost:9092,localhost:9093,localhost:9094";
@@ -118,10 +118,6 @@ public class RouterMicroservice {
 
         final String  InstanceStatusTopicName = "InstanceStatus_Topic";
         createTopic.createMyCompactTopic(InstanceStatusTopicName, 1, replicateFactor); // create the topic which contains all the necessary infos for the instances
-       /* Metrics metrics = new Metrics();
-        Sensor sensor = metrics.sensor("throughputSensorRouter");
-        MetricName metricName = new MetricName("throughput", "userMetrics", "Tracks throughput", new HashMap<>());
-        sensor.add(metricName, new Rate());*/
 
 
 
@@ -622,7 +618,7 @@ public class RouterMicroservice {
 
     public static void main(String[] args) {
         //init microservice
-
+        GenericSynopsesMicroService.makeMetrics= ConfigMetrics.enableCommunicationCostMetrics();
         RouterMicroservice routerMicroservice = new RouterMicroservice();
         routerMicroservice.clear();
         routerMicroservice.start();// start streams

@@ -4,87 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="- Add config.properties for linux execution also instruction in Readme.md about config.properties">
+    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-New packaging layering for Structure Folder(Entity, Dto, Output)&#10;- Add new config.properties file for linux  in configuration file as now exist only for windows  and add an explanation in Readme.md&#10;-Add it a converter folder which convert from txt to json format, also add a Readme.md section how this script works&#10;-new method for Running Zookeeper and Kafka Cluster using docker-compose.yml file as now we can do it by the script, also add it a Readme.md section&#10;-Finally add it in Script folder a new script which run kafka cluster and zookeeper also in linux as now exist only for windows, also add it a Readme.md section for more details">
+      <change afterPath="$PROJECT_DIR$/Configuration/MetricsConfig.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Configuration/MetricsConfigLinux.properties" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Scripts/RunAllScripts.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose1.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/convertingData/TransformTxtFilesIntoJsons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/CommunicationCostJMXMetrics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ConfigMetrics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/FunctionalitiesJMX.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/JMXMetrics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/MetricsUserInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ThroughputJMXMetrics.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Configuration/kafka-config.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/ConsumeDataFromOutputTopic.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/IndependentScripts/reset-script.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/IndependentScripts/startKafkaServer.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/IndependentScripts/startZookeper.cmd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/RunAllScripts.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/RunAllScripts.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose1.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/AddBatchDataToSynopsesProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/AddBatchDataToSynopsesProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/DataStructureCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/DataStructureCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/ProcessedDataTransformSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/ProcessedDataTransformSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/StoreAndProduceTopicCounterTransformSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/ClassMaybeUsefull/StoreAndProduceTopicCounterTransformSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/Producer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerDispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerLoadReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/ProducerLoadReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/RealTimeProduceData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/InitProducer/ProducerScript/RealTimeProduceData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/ByteCountingSensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/ByteCountingSensor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/LoadAndSaveSynopsis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/LoadAndSaveSynopsis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/ByteCountingSensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ByteCountingSensor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXCommunicationCostCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXCommunicationCostCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/MetricsReporter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/ThroughputSensor.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/RouterMicroservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/RouterMicroservice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/GenericSynopsesMicroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/GenericSynopsesMicroService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/RawDataMicroService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/RawDataMicroService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalInputTopicTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalInputTopicTransformer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalOutputTopicTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalOutputTopicTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/AddBatchDataToSynopsesStateStoreTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/AddBatchDataToSynopsesStateStoreTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/SingleThreadTransformSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/SingleThreadTransformSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/SynopsisTransformerSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/SynopsisTransformerSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/WindowAggregatorForMergeTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/WindowAggregatorForMergeTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/WindowAggregatorForNoMergeSynopsisTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Transformers/WindowAggregatorForNoMergeSynopsisTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Partitioners/CustomStreamPartitioner6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/RequestGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/util/RequestGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataStructure/DataStructureSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/DataWithMetaDataParameters/DataWithMetaDataParametersSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/EstimationResult/EstimationResultSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListDataStructure/ListDataStructureSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/ListRequestStructure/ListRequestStructureSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestStructure/RequestStructureSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithDataStructure/RequestWithDataStructureSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/RequestWithMetaDataParameters/RequestWithMetaDataParametersSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/SetDataStructureSerde/SetDataStructureSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/SetDataStructureSerde/SetDataStructureSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/KTableMergejoinTuple2DemSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/KTableMergejoinTuple2DemSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/LoadTupleTuple2demSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/LoadTupleTuple2demSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/SpecificTuple2DemSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/SpecificTuple2DemSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/Tuple2DemSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/Init/Tuple2Dem/Tuple2DemSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsesAndRequest/SynopsisAndRequestSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsesAndRequest/SynopsisAndRequestSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersSerde.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersSerde.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Serdes/SynopsesSerdes/SynopsisAndParameters/SynopsisAndParametersSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/DataStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/entities/DataStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/EstimationResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/result/EstimationResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/InstanceStateStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/InstanceStateStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/RequestStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/entities/RequestStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/RequestWithDataStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/RequestWithDataStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/StructureWithMetaDataParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/StructureWithMetaDataParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/SynopsisAndParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/SynopsisAndParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/SynopsisAndRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/SynopsisAndRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/Tuple2Dem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/Tuple2Dem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/Tuple2DemExt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/Tuple2DemExt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/Tuple2DemWithSynopsis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/dto/Tuple2DemWithSynopsis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/transformBigData/JsonPriceCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/util/JsonPriceCounter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/transformBigData/PreProcessDataBeforeUsed.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,10 +89,15 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.JMXCommunicationCostCollector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JMXMetricsCollector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetricsInterface.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetricsUserInterface.executor&quot;: &quot;Run&quot;,
     &quot;Application.Producer.executor&quot;: &quot;Run&quot;,
     &quot;Application.RouterMicroservice.executor&quot;: &quot;Run&quot;,
     &quot;Application.RunRequest.executor&quot;: &quot;Run&quot;,
     &quot;Application.RunRequestQuery.executor&quot;: &quot;Run&quot;,
+    &quot;Application.runMetrics.executor&quot;: &quot;Run&quot;,
     &quot;Batch.RunAllScripts.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.kafka1: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.kafka2: Compose Deployment.executor&quot;: &quot;Run&quot;,
@@ -155,7 +110,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;BetaBranch&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/SpringBootWorkSpace/Synopses-as-a-MicroService-SaaMS/Scripts&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SpringBootWorkSpace/Synopses-as-a-MicroService-SaaMS/Configuration&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -169,9 +124,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS\Configuration" />
       <recent name="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS\Scripts" />
       <recent name="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS" />
-      <recent name="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS\Configuration" />
       <recent name="C:\Users\kalfa\IntaleJworkspace\ClusterProjects\SaaMS_APP\src\main\java\org\kafkaApp" />
       <recent name="C:\Users\kalfa\IntaleJworkspace\ClusterProjects\SaaMS_APP" />
     </key>
@@ -179,13 +134,13 @@
       <recent name="org.kafkaApp.Serdes.Init.Tuple2Dem" />
     </key>
   </component>
-  <component name="RunManager" selected="Batch.RunAllScripts">
-    <configuration name="Producer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.InitProducer.Producer" />
+  <component name="RunManager" selected="Application.Producer">
+    <configuration name="JMXCommunicationCostCollector" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.Metrics.JMXCommunicationCostCollector" />
       <module name="SaaMS_APP" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.kafkaApp.InitProducer.*" />
+          <option name="PATTERN" value="org.kafkaApp.Metrics.newMetricsClass.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -193,12 +148,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RouterMicroservice" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.Microservices.Router.RouterMicroservice" />
+    <configuration name="MetricsUserInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.Metrics.newMetricsClass.MetricsUserInterface" />
       <module name="SaaMS_APP" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.kafkaApp.Microservices.Router.*" />
+          <option name="PATTERN" value="org.kafkaApp.Metrics.newMetricsClass.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Producer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.InitProducer.Producer" />
+      <module name="SaaMS_APP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.kafkaApp.InitProducer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -219,13 +187,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunAllScripts" type="BatchConfigurationType" factoryName="Batch" temporary="true">
+    <configuration name="runMetrics" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.kafkaApp.Microservices.Router.RouterMicroservice" />
       <module name="SaaMS_APP" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="WORKING_DIRECTORY" value="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS\Scripts" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SCRIPT_NAME" value="RunAllScripts.cmd" />
-      <option name="PARAMETERS" value="" />
+      <option name="VM_PARAMETERS" value="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -244,13 +209,21 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.runMetrics" />
+      <item itemvalue="Application.MetricsUserInterface" />
+      <item itemvalue="Application.JMXCommunicationCostCollector" />
+      <item itemvalue="Application.RunRequest" />
+      <item itemvalue="Application.Producer" />
+      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Batch.RunAllScripts" />
         <item itemvalue="Application.Producer" />
+        <item itemvalue="Application.MetricsUserInterface" />
         <item itemvalue="Application.RunRequest" />
-        <item itemvalue="Application.RouterMicroservice" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Application.JMXCommunicationCostCollector" />
       </list>
     </recent_temporary>
   </component>
@@ -285,7 +258,15 @@
       <workItem from="1736851841249" duration="22264000" />
       <workItem from="1736936574645" duration="3396000" />
       <workItem from="1736942769173" duration="596000" />
-      <workItem from="1737128007870" duration="4292000" />
+      <workItem from="1737128007870" duration="5612000" />
+      <workItem from="1737193609049" duration="11122000" />
+      <workItem from="1737279699793" duration="15289000" />
+      <workItem from="1737305459699" duration="3165000" />
+      <workItem from="1737368664667" duration="1610000" />
+      <workItem from="1737370407359" duration="1847000" />
+      <workItem from="1737375847159" duration="812000" />
+      <workItem from="1737377169886" duration="5785000" />
+      <workItem from="1737383132574" duration="5048000" />
     </task>
     <task id="LOCAL-00001" summary="-Readme.md imported for better&#10;-small changes in functionality of code">
       <option name="closed" value="true" />
@@ -343,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736520073327</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="-New packaging layering for Structure Folder(Entity, Dto, Output)&#10;- Add new config.properties file for linux  in configuration file as now exist only for windows  and add an explanation in Readme.md&#10;-Add it a converter folder which convert from txt to json format, also add a Readme.md section how this script works&#10;-new method for Running Zookeeper and Kafka Cluster using docker-compose.yml file as now we can do it by the script, also add it a Readme.md section&#10;-Finally add it in Script folder a new script which run kafka cluster and zookeeper also in linux as now exist only for windows, also add it a Readme.md section for more details">
+      <option name="closed" value="true" />
+      <created>1737133032587</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737133032587</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,6 +368,7 @@
     <MESSAGE value="-new Readme.md" />
     <MESSAGE value="- Add save/Load functionality" />
     <MESSAGE value="- Add config.properties for linux execution also instruction in Readme.md about config.properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Add config.properties for linux execution also instruction in Readme.md about config.properties" />
+    <MESSAGE value="-New packaging layering for Structure Folder(Entity, Dto, Output)&#10;- Add new config.properties file for linux  in configuration file as now exist only for windows  and add an explanation in Readme.md&#10;-Add it a converter folder which convert from txt to json format, also add a Readme.md section how this script works&#10;-new method for Running Zookeeper and Kafka Cluster using docker-compose.yml file as now we can do it by the script, also add it a Readme.md section&#10;-Finally add it in Script folder a new script which run kafka cluster and zookeeper also in linux as now exist only for windows, also add it a Readme.md section for more details" />
+    <option name="LAST_COMMIT_MESSAGE" value="-New packaging layering for Structure Folder(Entity, Dto, Output)&#10;- Add new config.properties file for linux  in configuration file as now exist only for windows  and add an explanation in Readme.md&#10;-Add it a converter folder which convert from txt to json format, also add a Readme.md section how this script works&#10;-new method for Running Zookeeper and Kafka Cluster using docker-compose.yml file as now we can do it by the script, also add it a Readme.md section&#10;-Finally add it in Script folder a new script which run kafka cluster and zookeeper also in linux as now exist only for windows, also add it a Readme.md section for more details" />
   </component>
 </project>

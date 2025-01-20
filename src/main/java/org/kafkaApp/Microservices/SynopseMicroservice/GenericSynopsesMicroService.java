@@ -36,6 +36,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class GenericSynopsesMicroService {
+    public static boolean makeMetrics = false;
+
     private KafkaStreams kafkaStreams;
 
     private static final String BOOTSTRAP_SERVERS = EnvironmentConfiguration.getBootstrapServers();//"localhost:9092,localhost:9093,localhost:9094";
@@ -190,7 +192,8 @@ public class GenericSynopsesMicroService {
 
 
         KStream<String, SynopsisAndParameters> subSynopses = builder.stream(intermidiateTopicName, Consumed.with(Serdes.String(), new SynopsisAndParametersSerde()));
-               // .transform(()->new TotalOutputTopicTransformer("finalSynopses-byte-count",synopsesType));
+
+        subSynopses.transform(()->new TotalOutputTopicTransformer("finalSynopses-byte-count",synopsesType));
 
         KTable<String,RequestStructure> queryTableMeged = queryReqStream
                 .toTable(Materialized.with(Serdes.String(),new RequestStructureSerde()));
@@ -362,8 +365,7 @@ public class GenericSynopsesMicroService {
                 });
 
 
-        singleThreadSynopsesResult//.transform(()->new TotalOutputTopicTransformer("singleThreadSynopsesResult-byte-count",synopsesType))
-                .to("OutputTopicSynopsis"+SynopsisId,Produced.with(Serdes.String(), Serdes.String()));
+        singleThreadSynopsesResult.to("OutputTopicSynopsis"+SynopsisId,Produced.with(Serdes.String(), Serdes.String()));
 
 
         estimationNoMergedSynopsis.to("OutputTopicSynopsis"+SynopsisId,Produced.with(Serdes.String(), Serdes.String()));
