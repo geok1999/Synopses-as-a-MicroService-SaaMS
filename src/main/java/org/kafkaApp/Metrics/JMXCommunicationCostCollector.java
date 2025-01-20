@@ -1,5 +1,7 @@
 package org.kafkaApp.Metrics;
 
+import org.kafkaApp.Microservices.SynopseMicroservice.GenericSynopsesMicroService;
+
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
 import javax.management.remote.JMXConnector;
@@ -16,40 +18,20 @@ public class JMXCommunicationCostCollector {
         urls.add(new JMXServiceURL(url));
     }
 
-
-    public static void manageServiceUrls() {
-
-        int choice = -1;
-        while (choice != 0) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter 1 to add a URL or 0 to stop this process:");
-            choice = scanner.nextInt();
-            scanner.nextLine();  // Consume newline left-over
-            if (choice == 1) {
-                System.out.println("Enter the URL:");
-                String url = scanner.nextLine();
-                try {
-                    collector.addUrl(url);
-                    System.out.println("URL added successfully.");
-                } catch (Exception e) {
-                    System.out.println("Invalid URL. Please enter a valid JMXServiceURL.");
-                }
-            } else if (choice != 0) {
-                System.out.println("Invalid choice.");
-            }
-        }
-    }
-
     public static void main(String[] args) throws Exception {
         //JMXCommunicationCostCollector collector = new JMXCommunicationCostCollector();
         //service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi
         // Add URLs as needed
        // collector.addUrl("service:jmx:rmi:///jndi/rmi://snf-36110.ok-kno.grnetcloud.net:9999/jmxrmi");
-        collector.addUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
-        manageServiceUrls();
+        //collector.addUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
+        collector.addUrl("service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi");
+
+        // manageServiceUrls();
         // Add more URLs as needed
         // urls.add(new JMXServiceURL("service:jmx:rmi:///jndi/rmi://another-host:another-port/jmxrmi"));
-        //ObjectName mbeanNames = new ObjectName("kafka.streams:type=finalSynopses-byte-countbyte-counting");
+
+
+        ObjectName mbeanNames = new ObjectName("kafka.streams:type=finalSynopses-byte-countbyte-counting");
         ObjectName mbeanNames2 = new ObjectName("kafka.streams:type=InitSynopses-byte-countbyte-counting");
 
         double totalSensorValue1 = 0;
@@ -62,14 +44,14 @@ public class JMXCommunicationCostCollector {
                 // Construct the ObjectName for the MBean you want to access
 
 
-              // Double sensorValue1 = (Double) mbsc.getAttribute(mbeanNames, "finalSynopses-byte-count");
+                Double sensorValue1 = (Double) mbsc.getAttribute(mbeanNames, "finalSynopses-byte-count");
                 Double sensorValue2 = (Double) mbsc.getAttribute(mbeanNames2, "InitSynopses-byte-count");
-               // totalSensorValue1 += sensorValue1;
-                totalSensorValue2 += sensorValue2;
+                totalSensorValue1 += sensorValue1;
+                //totalSensorValue2 += sensorValue2;
 
             }
         }
-        //System.out.println("Sensor Value for " +collector.urls.size()+ mbeanNames + ": " + totalSensorValue1);
+        System.out.println("Sensor Value for " +collector.urls.size()+ mbeanNames + ": " + totalSensorValue1);
         System.out.println("Sensor Value for " + mbeanNames2 + ": " + totalSensorValue2);
     }
 }

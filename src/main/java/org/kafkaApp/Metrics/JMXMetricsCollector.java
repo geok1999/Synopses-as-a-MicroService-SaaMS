@@ -1,10 +1,10 @@
 package org.kafkaApp.Metrics;
 
+import org.kafkaApp.Metrics.newMetricsClass.FunctionalitiesJMX;
+
 import javax.management.AttributeNotFoundException;
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
-import javax.management.remote.JMXConnector;
-import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -22,6 +22,9 @@ public class JMXMetricsCollector {
 
     public static void main(String[] args) throws Exception {
 
+
+        System.out.println("Configured JMX Service URLs:");
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the case name:");
         String fileName = scanner.nextLine();
@@ -32,7 +35,8 @@ public class JMXMetricsCollector {
         //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36110.ok-kno.grnetcloud.net:9999/jmxrmi");
         //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36112.ok-kno.grnetcloud.net:9999/jmxrmi");
         //addServiceUrl("service:jmx:rmi:///jndi/rmi://snf-36103.ok-kno.grnetcloud.net:9999/jmxrmi");
-        addServiceUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
+        //addServiceUrl("service:jmx:rmi:///jndi/rmi://polytechnix.softnet.tuc.gr:9999/jmxrmi");
+        addServiceUrl("service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi");
 
         //manageServiceUrls();
 
@@ -87,37 +91,25 @@ public class JMXMetricsCollector {
         double totalMaxLatency = 0;
 
         for (JMXServiceURL url : serviceUrls) {
-            JMXConnector jmxc = null;
-            try {
-                jmxc = JMXConnectorFactory.connect(url, null);
-                MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
+            MBeanServerConnection mbsc = FunctionalitiesJMX.connectToJMX(url);
 
-                ObjectName queryNameRouter = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=router-microservice-*");
-                ObjectName queryNameSynopsis = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=synopsis*microservice-*");
+            ObjectName queryNameRouter = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=router-microservice-*");
+            ObjectName queryNameSynopsis = new ObjectName("kafka.streams:type=stream-thread-metrics,thread-id=synopsis*microservice-*");
 
-                Set<ObjectName> mbeanNamesRouter = mbsc.queryNames(queryNameRouter, null);
-                Set<ObjectName> mbeanNamesSynopsis = mbsc.queryNames(queryNameSynopsis, null);
+            Set<ObjectName> mbeanNamesRouter = mbsc.queryNames(queryNameRouter, null);
+            Set<ObjectName> mbeanNamesSynopsis = mbsc.queryNames(queryNameSynopsis, null);
 
-                // Aggregating throughput for Router Microservice
-                MetricsTable routerMetrics = aggregateThroughput(mbsc, mbeanNamesRouter);
-                totalProcessRate += routerMetrics.throughput;
-                totalAvgLatency += routerMetrics.avgLatency;
-                totalMaxLatency = Math.max(totalMaxLatency, routerMetrics.maxLatency);
+            // Aggregating throughput for Router Microservice
+            MetricsTable routerMetrics = aggregateThroughput(mbsc, mbeanNamesRouter);
+            totalProcessRate += routerMetrics.throughput;
+            totalAvgLatency += routerMetrics.avgLatency;
+            totalMaxLatency = Math.max(totalMaxLatency, routerMetrics.maxLatency);
 
-                // Aggregating throughput for Synopses Microservices
-                MetricsTable synopsisMetrics = aggregateThroughput(mbsc, mbeanNamesSynopsis);
-                totalProcessRate += synopsisMetrics.throughput;
-                totalAvgLatency += synopsisMetrics.avgLatency;
-                totalMaxLatency = Math.max(totalMaxLatency, synopsisMetrics.maxLatency);
-            } finally {
-                if (jmxc != null) {
-                    try {
-                        jmxc.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            // Aggregating throughput for Synopses Microservices
+            MetricsTable synopsisMetrics = aggregateThroughput(mbsc, mbeanNamesSynopsis);
+            totalProcessRate += synopsisMetrics.throughput;
+            totalAvgLatency += synopsisMetrics.avgLatency;
+            totalMaxLatency = Math.max(totalMaxLatency, synopsisMetrics.maxLatency);
         }
         String runId = UUID.randomUUID().toString();
 
@@ -127,7 +119,7 @@ public class JMXMetricsCollector {
                 "Total Max Latency: " + totalMaxLatency + "\n"+ "\n";
 
         // Write the result to a file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/home/gkalfakis/MetricsFolder/"+fileName+".txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\dataset\\MetricsResults\\"+fileName+".txt", true))) {
             writer.write(result);
         } catch (IOException e) {
             e.printStackTrace();

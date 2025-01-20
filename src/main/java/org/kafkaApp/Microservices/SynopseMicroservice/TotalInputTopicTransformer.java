@@ -3,7 +3,7 @@ package org.kafkaApp.Microservices.SynopseMicroservice;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
-import org.kafkaApp.Metrics.ByteCountingSensor;
+import org.kafkaApp.Metrics.newMetricsClass.ByteCountingSensor;
 import org.kafkaApp.Structure.entities.DataStructure;
 
 import java.net.InetAddress;
@@ -29,24 +29,26 @@ public class TotalInputTopicTransformer implements Transformer<String, DataStruc
 
     @Override
     public KeyValue<String, DataStructure> transform(String key, DataStructure value) {
-        byteCountingSensor.recordDataStructureType(value);
-        long totalBytes = byteCountingSensor.getTotalBytes();
-        //totalBytes += value.getBytes().length;
-        String hostname = null;
-        try {
-            hostname = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+        if (GenericSynopsesMicroService.makeMetrics) {
+            byteCountingSensor.recordDataStructureType(value);
+            long totalBytes = byteCountingSensor.getTotalBytes();
+            //totalBytes += value.getBytes().length;
+            String hostname = null;
+            try {
+                hostname = InetAddress.getLocalHost().getHostName();
+            } catch (UnknownHostException e) {
+                throw new RuntimeException(e);
+            }
 
-        String output = "SynopsesName: " + synopsesName+ ", VM Name: " + hostname + ", Total Bytes: " + totalBytes + "\n";
-        System.out.println(output);
+            String output = "SynopsesName: " + synopsesName + ", VM Name: " + hostname + ", Total Bytes: " + totalBytes + "\n";
+            System.out.println(output);
         /*try (FileWriter writer = new FileWriter("C:\\dataset\\MetricsResults\\ComunicationCostfile.txt", true);
              BufferedWriter bw = new BufferedWriter(writer)) {
             bw.write(output);
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+        }
         return new KeyValue<>(key, value);
     }
 

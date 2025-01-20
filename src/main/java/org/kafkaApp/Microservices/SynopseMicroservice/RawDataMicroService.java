@@ -59,7 +59,7 @@ public class RawDataMicroService {
         KStream<String, DataStructure> dataStream = builder.stream(dataTopicName, Consumed.with(Serdes.String(), new DataStructureSerde()));
 
 
-        dataStream//.transform(()->new TotalInputTopicTransformer("InitSynopses-byte-count","RawData"))
+        dataStream.transform(()->new TotalInputTopicTransformer("InitSynopses-byte-count","RawData"))
                 .to("Intermidiate_Multy_Thread_Tpic_"+topicCount , Produced.with(Serdes.String(), new DataStructureSerde()));
 
         KStream<String, DataStructure> subSynopses = builder.stream("Intermidiate_Multy_Thread_Tpic_"+topicCount, Consumed.with(Serdes.String(), new DataStructureSerde()))
