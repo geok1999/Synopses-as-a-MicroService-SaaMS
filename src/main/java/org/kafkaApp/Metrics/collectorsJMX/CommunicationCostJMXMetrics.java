@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.newMetricsClass;
+package org.kafkaApp.Metrics.collectorsJMX;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;

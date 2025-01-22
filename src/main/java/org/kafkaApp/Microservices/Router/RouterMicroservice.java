@@ -16,7 +16,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.CreateTopic;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
-import org.kafkaApp.Metrics.newMetricsClass.ConfigMetrics;
+import org.kafkaApp.Metrics.utils.ConfigMetrics;
 import org.kafkaApp.Microservices.SynopseMicroservice.GenericSynopsesMicroService;
 import org.kafkaApp.Microservices.SynopseMicroservice.RawDataMicroService;
 import org.kafkaApp.Partitioners.CustomGenericStreamPartitioner;
@@ -36,10 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
@@ -58,7 +55,7 @@ public class RouterMicroservice {
     private static final Logger logger = LoggerFactory.getLogger(RouterMicroservice.class);
     static AtomicInteger produceMessages = new AtomicInteger(0);
     private final LeaderElection leaderElection;
-
+    private static final Map<Integer, GenericSynopsesMicroService> activeMicroservices = new ConcurrentHashMap<>();
 
     public RouterMicroservice() {
 
@@ -210,6 +207,24 @@ public class RouterMicroservice {
                 .aggregate(() -> new StructureWithMetaDataParameters<>(null, 0, 0,0,false), (key, value, aggregate) ->{
                             aggregate.setMetaData1(aggregate.getMetaData1()+1); //group count
                             //here check if GKquantilie to setup to noOfp=1
+                            if (value.getParam()[0].equals("DELETE_REQUEST")) {
+                                int topicCount = aggregate.getMetaData2();
+
+                                System.out.println("DELETE SYNOPSIS "+topicCount);
+
+                                GenericSynopsesMicroService microservice = activeMicroservices.remove(topicCount);
+                                if (microservice != null) {
+                                    microservice.stop();
+                                    microservice.clear();
+                                    System.out.println("Stopped microservice for topicCount: " + topicCount);
+
+                                    //createTopic.deleteTopics(reqTopicName,dataTopicName,intermidiateTopicName);
+                                } else {
+                                    System.out.println("No microservice found for topicCount: " + topicCount);
+                                }
+                                return null;
+                            }
+
                             if(value.getParam()[2].equals("NotQueryable")){
                                 aggregate.setMetaData3(aggregate.getMetaData3()+1);
                                 if(aggregate.getMetaData1()<=1 || value.getParam()[0].equals("LOAD_REQUEST") ){
@@ -239,6 +254,7 @@ public class RouterMicroservice {
                         //Materialized.with(Serdes.String(), new RequestWithMetaDataParametersSerde())
                 )
                 .toStream()
+                .filter((key, value) -> key != null && value != null)
                 .repartition(Repartitioned.<String, StructureWithMetaDataParameters<RequestStructure>>as("SpreadRequestIntoAllPartitions")
                         .withKeySerde(Serdes.String())
                         .withValueSerde(new RequestWithMetaDataParametersSerde())
@@ -272,6 +288,9 @@ public class RouterMicroservice {
                         System.out.println("Microservice already created");
                         return value;
                     }
+
+                    GenericSynopsesMicroService synopsesMicroService = null;
+
                     System.out.println("Creating microservice ");
                     if(synopsisID==0){
                         RawDataMicroService rawDataMicroService = new RawDataMicroService(topicCount,numPartitions);
@@ -282,62 +301,54 @@ public class RouterMicroservice {
 
                     if (synopsisID == 1) {//COUNTMIN
                         value.setMergedSynopses(true);
-                        GenericSynopsesMicroService synopsesMicroService1 = new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"CountMin",key,true);
-                        synopsesMicroService1.clear();
-                        synopsesMicroService1.start();
+                        synopsesMicroService = new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"CountMin",key,true);
 
                     } else if(synopsisID == 2){//HYPERLOGLOG
                         value.setMergedSynopses(true);
-                        GenericSynopsesMicroService synopsesMicroService2= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"HyperLogLog",key,true);
-                        synopsesMicroService2.clear();
-                        synopsesMicroService2.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"HyperLogLog",key,true);
+
                     }
                     else if(synopsisID == 3 ){//BLOOMFILTER
                         value.setMergedSynopses(true);
-                        GenericSynopsesMicroService synopsesMicroService3= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"BloomFilter",key,true);
-                        synopsesMicroService3.clear();
-                        synopsesMicroService3.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"BloomFilter",key,true);
+
                     }
                     else if(synopsisID == 4 ){//DFT
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService4= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"DFT",key,false);
-                        synopsesMicroService4.clear();
-                        synopsesMicroService4.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"DFT",key,false);
                     }
                     else if(synopsisID == 5 ){//LossyCounting
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService5= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"LossyCounting",key,false);
-                        synopsesMicroService5.clear();
-                        synopsesMicroService5.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"LossyCounting",key,false);
+
                     }else if(synopsisID == 6 ){//StickySampling
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService6= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"StickySampling",key,false);
-                        synopsesMicroService6.clear();
-                        synopsesMicroService6.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"StickySampling",key,false);
+
                     }
                     else if(synopsisID == 7 ){//AMSSketch
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService7= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"AMSSketch",key,false);
-                        synopsesMicroService7.clear();
-                        synopsesMicroService7.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"AMSSketch",key,false);
+
                     }
                     else if(synopsisID == 8 ){//GKQuantiles
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService8= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"GKQuantiles",key,false);
-                        synopsesMicroService8.clear();
-                        synopsesMicroService8.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"GKQuantiles",key,false);
+
                     }
                     else if(synopsisID == 9 ){//LSH
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService9= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"LSH",key,false);
-                        synopsesMicroService9.clear();
-                        synopsesMicroService9.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"LSH",key,false);
                     }
                     else if(synopsisID == 10 ){//WindowSketchQuantilesSynopsis
                         value.setMergedSynopses(false);
-                        GenericSynopsesMicroService synopsesMicroService10= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"WindowSketchQuantiles",key,false);
-                        synopsesMicroService10.clear();
-                        synopsesMicroService10.start();
+                        synopsesMicroService= new GenericSynopsesMicroService(topicCount,numPartitions,request.getSynopsisID(),"WindowSketchQuantiles",key,false);
+
+                    }
+                    if (synopsesMicroService != null) {
+                        activeMicroservices.put(topicCount, synopsesMicroService);
+                        synopsesMicroService.clear();
+                        synopsesMicroService.start();
                     }
 
                     return value;

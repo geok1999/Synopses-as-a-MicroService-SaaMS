@@ -3,101 +3,81 @@
   {
     "streamID" : "EURTRY",
     "synopsisID" : 1,
-    "requestID" : 1,
     "dataSetKey" : "Forex",
     "param" : [ "CountMin", "price", "NotQueryable", 0.002, 0.99, 12345 ],
     "partition" : 0,
-    "noOfP" : 4,
-    "uid" : 1001
+    "noOfP" : 4
   },
   {
   "streamID" : "EURTRY",
   "synopsisID" : 2,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "HyperLogLog", "price", "NotQueryable", 0.002 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 3,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "BloomFitler", "price", "NotQueryable", 150000, 0.01 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 4,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "DFT", "price", "NotQueryable", 1, 500, 2000, 8 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 5,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "LossyCounting", "price", "NotQueryable", 0.001 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 6,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "StickySampling", "price", "NotQueryable", 0.001, 1.0E-4, 0.001 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 7,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "AMSSketch", "price", "NotQueryable", 10, 10000 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 8,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "GKQuantiles", "price", "NotQueryable", 0.01 ],
   "partition" : 0,
-  "noOfP" : 1,
-  "uid" : 1001
+  "noOfP" : 1
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 9,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "LSHsynopsis", "price", "NotQueryable", 100,500,20 ],
   "partition" : 0,
-  "noOfP" : 4,
-  "uid" : 1001
+  "noOfP" : 4
 },
 {
   "streamID" : "EURTRY",
   "synopsisID" : 10,
-  "requestID" : 1,
   "dataSetKey" : "Forex",
   "param" : [ "WindowSketchQuantiles", "price", "NotQueryable", 0.01,40000 ],
   "partition" : 0,
-  "noOfP" : 1,
-  "uid" : 1001
+  "noOfP" : 1
 }
 ]

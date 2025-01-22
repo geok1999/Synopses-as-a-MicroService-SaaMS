@@ -8,6 +8,7 @@
     - [Request message for adding a new Synopsis](#request-message-for-adding-a-new-synopsis)
     - [Request message for query a Synopsis](#request-message-for-query-a-synopsis)
     - [Load Request Message from a file](#load-request-message-from-a-file)
+    - [Delete Request Message from a file](#delete-request-message-from-a-file)
     - [Output Message](#output-message)
 5. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
@@ -17,6 +18,9 @@
         - [Step 3: Run the SaaMS JAR](#step-3-run-the-saams-jar)
         - [Step 4: Run the User interface JAR](#step-4-run-the-user-interface-jar)
 6. [Annex1: How to use transform data script](#annex-how-to-use-transform-data-script)
+    - [Step 1: Must have a txt file with the following file name format](#step-1-must-have-a-txt-file-with-the-following-file-name-format)
+    - [Step 2: Each line of the txt file must have the following format](#step-2-each-line-of-the-txt-file-must-have-the-following-format)
+    - [Step 3: Run the transform data script and provide the path of stock market where the txt file is located](#step-3-run-the-transform-data-script-and-provide-the-path-of-stock-market-where-the-txt-file-is-located)
 7. [Annex2: How to establish a Kafka Cluster and a Zookeeper Server which is necessary for execute SaaMS](#annex-2-how-to-establish-a-kafka-cluster-and-a-zookeeper-server-which-is-necessary-for-execute-saams)
     - [Method 1: Using a Script](#method-1-using-a-script)
     - [Method 2: Using Docker](#method-2-using-docker)
@@ -111,7 +115,6 @@ In SaaMS, interaction is carried out through a user interface application. The u
 ```json
 {
     "streamID":"EURTRY",
-    "objectID":"EURTRY_0",
     "dataSetKey":"Forex",
     "date":"01/02/2019",
     "time":"00:00:01",
@@ -122,7 +125,6 @@ In SaaMS, interaction is carried out through a user interface application. The u
 ## Data Message Structure Explanation:
 
 - **streamID (String):** In a financial example, it represents the stock name.
-- **objectID (String):** A unique identifier for each `streamID`.
 - **dataSetKey (String):** In a financial example, it represents the Stock Market name.
 - **date & time (String):** The timestamp at which the `streamID` was captured.
 - **price (Double):** The current price at the specified date and time.
@@ -134,11 +136,9 @@ In SaaMS, interaction is carried out through a user interface application. The u
 {
     "streamID": "EURTRY", 
     "synopsisID": 1,
-    "requestID": 1,
     "dataSetKey": "Forex",
     "param": ["CountMin", "price", "NotQueryable", 0.001, 0.99, 12345],
-    "noOfP": 5,
-    "uid": 1001
+    "noOfP": 5
 }
 ```
 
@@ -147,18 +147,15 @@ In SaaMS, interaction is carried out through a user interface application. The u
 {
     "streamID" : "EURTRY",
     "synopsisID" : 1,
-    "requestID" : 2,
     "dataSetKey" : "Forex",
-    "param" : [ 6.05736, "price", "Queryable", "Continues", 0.001, 0.99, 12345 ],
-    "noOfP" : 5,
-    "uid" : 1002
+    "param" : [ 6.05736, "price", "Queryable", "Continues"],
+    "noOfP" : 5
 }  
 ```
 ## Request Message Structure Explanation:
 
 - **streamID (String):** Symbolizes the item name that needs to build up a Synopsis. If the `streamID` is empty the synopsis built or queried for the whole streamIDs in the `dataSetKey`.
 - **synopsisID (Integer):** Defines the synopsis type based on the previous Table.
-- **requestID (Integer):** Unique identifier to distinguish each request.
 - **dataSetKey (String):** Symbolizes the source where we get the streamID.
 - **param (Object[]):** A table that contains different parameters necessary to build up or query a Synopsis. The structure depends on the context:
 
@@ -180,7 +177,6 @@ In SaaMS, interaction is carried out through a user interface application. The u
             5. **Synopsis Parameter (Variable Type):** Each synopsis has different parameters determined by the previous Table. For example, CountMin has epsilon, confidence, and seed.
 
 - **noOfP (Integer):** Defines the parallelization level of Synopsis Topics and Synopsis Microservice.
-- **uid (Integer):** [Optional - not used in the provided example.]
 
 An example of how to use for each type of Synopsis the query and not query Request Message exist in the `RequestExamples` file.
 ## Load Request Message from a file
@@ -188,6 +184,17 @@ The functionality of loading a saved Synopsis from disc, in practice, can be imp
 ```json
 {
   "param" : [ "LOAD_REQUEST", "PathToLoadSynopsis\\stored_CountMin.ser" ]
+}
+```
+## Delete Request Message from a file
+The functionality of deleting a maintained Synopsis in SaaMS, in practice, can be implemented using the following request:
+```json
+{
+  "streamID" : "EURTRY",
+  "synopsisID" : 1,
+  "dataSetKey" : "Forex",
+  "param" : [ "DELETE_REQUEST", "price"],
+  "noOfP" : 6
 }
 ```
 The `LOAD_REQUEST` is a keyword that indicates that the request is for loading a Synopsis from disc. The `PathToLoadSynopsis` is the path where the serialized file of the Synopsis is stored.
@@ -264,41 +271,47 @@ The `-DconfigFilePath` argument is optional, and the example file path `C:\datas
 
 # Annex 1: How to use transform data script
 The `transform_data.jar` is a Java application that can be used to transform a txt file to a JSON file. The JSON file can be used to produce data messages to the Data Kafka topic in SaaMS.
-## How to use the transform data script
-### Step 1: Must have a txt file with the following file name format:
+
+## Step 1: Must have a txt file with the following file name format:
 ```
 \<Market Type\>·\<Unique Identifier\>·\<Suffix\>
 ```
 This is necessary to extract:
 - **streamID**: Extracted from the second component (the unique identifier).
 - **dataSetKey**: Extracted from the first component (the market type).
-### Step 2: Each line of the txt file must have the following format:
+## Step 2: Each line of the txt file must have the following format:
 ```
 \<Date\>,\<Time\>,\<Price\>,\<Volume\>
 ```
-### Step 3: Run the transform data script and provide the path of stock market where the txt file is located
+## Step 3: Run the transform data script and provide the path of stock market where the txt file is located
+### Windows:
 ```
 java -DconfigFilePath="C:\\custom\\dataset\\path\\" -jar target/Transform-TXT-Data-To-Json.jar 
 ```
+### Linux:
+```
+java -DconfigFilePath="/home/user1/dataset/path/" -jar target/Transform-TXT-Data-To-Json.jar 
+```
+
 # Annex 2: How to establish a Kafka Cluster and a Zookeeper Server which is necessary for execute SaaMS
 In this project provides two methods to establish a Kafka Cluster and a Zookeeper Server:
-1. Method 1: Using a Script
-   1. Download and install the Kafka and Zookeeper from the official website 
-   2. In project Script folder, there are two scripts:
-      - `RunAllScripts.cmd` for Windows
-      - `RunAllScripts.sh` for Linux
-   3. Before execute the scripts check if the file paths that you install kafka are the same in the scripts.
-   4. Execute the script.
-2. Method 2: Using Docker
-   1. In the project, there is a docker-compose file that can be used to establish a Kafka Cluster and a Zookeeper Server.
-   2. Run the following command:
-      ``` shell
-      docker-compose up
-      ```
-   3. To stop the Kafka Cluster and Zookeeper Server, run the following command:
-      ``` shell
-      docker-compose down
-      ```
+## Method 1: Using a Script
+1. Download and install the Kafka and Zookeeper from the official website 
+2. In project Script folder, there are two scripts:
+   - `RunAllScripts.cmd` for Windows
+   - `RunAllScripts.sh` for Linux
+3. Before execute the scripts check if the file paths that you install kafka are the same in the scripts.
+4. Execute the script.
+## 2. Method 2: Using Docker
+1. In the project, there is a docker-compose file that can be used to establish a Kafka Cluster and a Zookeeper Server.
+2. Run the following command:
+    ``` shell
+    docker-compose up
+    ```
+3. To stop the Kafka Cluster and Zookeeper Server, run the following command:
+   ``` shell
+   docker-compose down
+   ```
 In both methods, the Kafka Cluster and Zookeeper Server will be established in the following ports:
 - Kafka Broker: 9092, 9093, 9094
 - Zookeeper: 2181

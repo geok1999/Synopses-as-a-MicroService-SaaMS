@@ -4,6 +4,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 
@@ -48,7 +49,17 @@ public class CreateTopic {
             System.out.println("Error creating topic: " + e.getMessage());
         }
     }
+    public void deleteTopics(String... topics) {
+        Properties properties = new Properties();
+        properties.put( AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
 
+        try (AdminClient adminClient = AdminClient.create(properties)) {
+            adminClient.deleteTopics(Arrays.asList(topics)).all().get();
+            System.out.println("Deleted topics: " + Arrays.toString(topics));
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to delete topics: " + Arrays.toString(topics), e);
+        }
+    }
     public static void main(String[] args) {
         CreateTopic topicCreator = new CreateTopic();
 

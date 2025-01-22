@@ -20,7 +20,7 @@ public class CreateConfiguration {
             //properties.put(StreamsConfig.NUM_STANDBY_REPLICAS_CONFIG, 2);  // Setting number of standby replicas to 1 because we want to run only two instance(n the number of replicas stands by and n+1 the instance that is running)
             properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); // earliest means that the consumer will read from the beginning of the topic
             properties.put(StreamsConfig.REPLICATION_FACTOR_CONFIG, EnvironmentConfiguration.giveTheReplicationFactor()); // replication factor 2 this means that we have 2 replicas for each partition and distributed alongside the brokers
-            properties.put(StreamsConfig.STATE_DIR_CONFIG, EnvironmentConfiguration.getTempDir() + UUID.randomUUID().toString()); // state directory for storing the state of the kafka streams
+            properties.put(StreamsConfig.STATE_DIR_CONFIG, EnvironmentConfiguration.getTempDir()); // state directory for storing the state of the kafka streams
            //ForTesting temporary disable
             //properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
             return properties;

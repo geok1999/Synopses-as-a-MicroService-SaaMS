@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.newMetricsClass;
+package org.kafkaApp.Metrics.collectorsJMX;
 
 import javax.management.remote.JMXServiceURL;
 import java.util.ArrayList;
@@ -6,8 +6,8 @@ import java.util.List;
 
 public abstract class JMXMetrics {
     protected List<JMXServiceURL> serviceUrls = new ArrayList<>();
-    protected static int STANDARD_PERIOD=0;
-    protected String fileName;//need changing
+    public static int STANDARD_PERIOD=0;
+    public String fileName;//need changing
 
     public void addServiceUrl(String url) throws Exception {
         serviceUrls.add(new JMXServiceURL(url));
