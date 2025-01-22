@@ -4,33 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-Changes the previous Metrics Folder creating a New Script(Metrics User Interface) making the metrics of Communication cost and Throughput easier for users. (Beta)&#10;-Add a section in Readme.md how to use this new Interface&#10;-Also add it instructions in Readme.md how can run this app also in linux environment">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/KeepTrackOfMicroservices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/MetricsConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/MetricsConfig.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration/MetricsConfigLinux.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration/MetricsConfigLinux.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RequestExamples/All_Type_of_NOT_Query_Request.json" beforeDir="false" afterPath="$PROJECT_DIR$/RequestExamples/All_Type_of_NOT_Query_Request.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RequestExamples/All_Type_of_Query_Request.json" beforeDir="false" afterPath="$PROJECT_DIR$/RequestExamples/All_Type_of_Query_Request.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/CreateConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/CreateConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/CreateTopic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Configuration/CreateTopic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXCommunicationCostCollector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/JMXMetricsCollector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/MetricsTable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ByteCountingSensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/sensors/ByteCountingSensor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/CommunicationCostJMXMetrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/collectorsJMX/CommunicationCostJMXMetrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ConfigMetrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/utils/ConfigMetrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/FunctionalitiesJMX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/utils/FunctionalitiesJMX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/JMXMetrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/collectorsJMX/JMXMetrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/MetricsUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/MetricsUserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/newMetricsClass/ThroughputJMXMetrics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Metrics/collectorsJMX/ThroughputJMXMetrics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/RouterMicroservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/Router/RouterMicroservice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalInputTopicTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalInputTopicTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalOutputTopicTransformer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Microservices/SynopseMicroservice/TotalOutputTopicTransformer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/entities/RequestStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/Structure/entities/RequestStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/kafkaApp/convertingData/TransformTxtFilesIntoJsons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/kafkaApp/convertingData/TransformTxtFilesIntoJsons.java" afterDir="false" />
-    </list>
+    <list default="true" id="85ce90c7-4685-4c76-b4e8-51c11d6d8575" name="Changes" comment="-Changes the previous Metrics Folder creating a New Script(Metrics User Interface) making the metrics of Communication cost and Throughput easier for users. (Beta)&#10;-Add a section in Readme.md how to use this new Interface&#10;-Also add it instructions in Readme.md how can run this app also in linux environment" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,44 +55,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.JMXCommunicationCostCollector.executor": "Run",
-    "Application.JMXMetricsCollector.executor": "Run",
-    "Application.MetricsInterface.executor": "Run",
-    "Application.MetricsUserInterface.executor": "Run",
-    "Application.Producer.executor": "Run",
-    "Application.RouterMicroservice.executor": "Run",
-    "Application.RunRequest.executor": "Run",
-    "Application.RunRequestQuery.executor": "Run",
-    "Application.TransformTxtFilesIntoJsons.executor": "Run",
-    "Application.runMetrics.executor": "Run",
-    "Batch.RunAllScripts.executor": "Run",
-    "Docker.docker-compose.yml.kafka1: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.kafka2: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.kafka3: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.zookeeper: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "JUnit.org.kafkaApp.convertingData in SaaMS_APP.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "BetaBranch",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/SpringBootWorkSpace/Synopses-as-a-MicroService-SaaMS/RequestExamples",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.JMXCommunicationCostCollector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JMXMetricsCollector.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetricsInterface.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MetricsUserInterface.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Producer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RouterMicroservice.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunRequest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RunRequestQuery.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TransformTxtFilesIntoJsons.executor&quot;: &quot;Run&quot;,
+    &quot;Application.runMetrics.executor&quot;: &quot;Run&quot;,
+    &quot;Batch.RunAllScripts.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka1: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka2: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka3: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.zookeeper: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.org.kafkaApp.convertingData in SaaMS_APP.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;BetaBranch&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/SpringBootWorkSpace/Synopses-as-a-MicroService-SaaMS/RequestExamples&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\SpringBootWorkSpace\Synopses-as-a-MicroService-SaaMS\RequestExamples" />
@@ -131,7 +105,7 @@
       <recent name="org.kafkaApp.Serdes.Init.Tuple2Dem" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Application.Producer">
     <configuration name="Producer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.kafkaApp.InitProducer.Producer" />
       <module name="SaaMS_APP" />
@@ -214,9 +188,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Application.RunRequest" />
         <item itemvalue="Application.Producer" />
+        <item itemvalue="Application.RunRequest" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Batch.RunAllScripts" />
         <item itemvalue="Application.TransformTxtFilesIntoJsons" />
       </list>
