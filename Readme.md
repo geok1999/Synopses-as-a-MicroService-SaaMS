@@ -186,6 +186,7 @@ The functionality of loading a saved Synopsis from disc, in practice, can be imp
   "param" : [ "LOAD_REQUEST", "PathToLoadSynopsis\\stored_CountMin.ser" ]
 }
 ```
+The `LOAD_REQUEST` is a keyword that indicates that the request is for loading a Synopsis from disc. The `PathToLoadSynopsis` is the path where the serialized file of the Synopsis is stored.
 ## Delete Request Message from a file
 The functionality of deleting a maintained Synopsis in SaaMS, in practice, can be implemented using the following request:
 ```json
@@ -197,7 +198,7 @@ The functionality of deleting a maintained Synopsis in SaaMS, in practice, can b
   "noOfP" : 6
 }
 ```
-The `LOAD_REQUEST` is a keyword that indicates that the request is for loading a Synopsis from disc. The `PathToLoadSynopsis` is the path where the serialized file of the Synopsis is stored.
+The `DELETE_REQUEST` is a keyword that indicates that the request is for deleting a maintained Synopsis. The other filed are the same as the [Request message for adding a new Synopsis](#request-message-for-adding-a-new-synopsis).
 ## Output Message
 The result of this estimation is written on an output Kafka topic with the name `OutputTopicSynopsis_(the synopsisid)`.
 The representation of the messages that the output topic can contain is presented below:
@@ -321,11 +322,11 @@ The Metrics User Interface is a Java application that used for implement metrics
 ### Step 1: Run the Metrics User Interface JAR
 #### Windows:
 ```
-java -DconfigFilePath=C:\dataset\Configuration\MetricsConfig.properties -jar target/Metrics-User-Interface.jar
+java -DconfigMetricsFilePath=C:\dataset\Configuration\MetricsConfig.properties -jar target/Metrics-User-Interface.jar
 ```
 #### Linux:
 ```
-java -DconfigFilePath=/home/user1/dataset/Configuration/MetricsConfig.properties -jar target/Metrics-User-Interface.jar
+java -DconfigMetricsFilePath=/home/user1/dataset/Configuration/MetricsConfig.properties -jar target/Metrics-User-Interface.jar
 ```
 
 The `-DconfigMetricsFilePath` argument is optional, and the example file path `C:\dataset\Configuration\MetricsConfig.properties` (Windows) or `/home/user1/dataset/Configuration/MetricsConfig.properties` (Linux) is provided for guidance. If it is not set, the application will use the default values to configure the app. 
