@@ -19,10 +19,11 @@ public class RequestStructure {
         this.dataSetKey = dataSetKey;
         this.param = param;
         this.partition=partition;
-
         this.noOfP = noOfP;
         this.uid = uid;
     }
+
+
 
     public String getStreamID() {
         return streamID;

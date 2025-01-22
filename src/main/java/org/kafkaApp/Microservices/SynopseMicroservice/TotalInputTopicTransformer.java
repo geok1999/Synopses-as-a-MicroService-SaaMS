@@ -3,7 +3,7 @@ package org.kafkaApp.Microservices.SynopseMicroservice;
 import org.apache.kafka.streams.KeyValue;
 import org.apache.kafka.streams.kstream.Transformer;
 import org.apache.kafka.streams.processor.ProcessorContext;
-import org.kafkaApp.Metrics.newMetricsClass.ByteCountingSensor;
+import org.kafkaApp.Metrics.sensors.ByteCountingSensor;
 import org.kafkaApp.Structure.entities.DataStructure;
 
 import java.net.InetAddress;

@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.newMetricsClass;
+package org.kafkaApp.Metrics.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;

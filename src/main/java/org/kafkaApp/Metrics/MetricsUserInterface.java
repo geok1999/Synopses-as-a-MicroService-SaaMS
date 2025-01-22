@@ -1,4 +1,9 @@
-package org.kafkaApp.Metrics.newMetricsClass;
+package org.kafkaApp.Metrics;
+
+import org.kafkaApp.Metrics.collectorsJMX.CommunicationCostJMXMetrics;
+import org.kafkaApp.Metrics.collectorsJMX.JMXMetrics;
+import org.kafkaApp.Metrics.collectorsJMX.ThroughputJMXMetrics;
+import org.kafkaApp.Metrics.utils.ConfigMetrics;
 
 import java.util.Arrays;
 import java.util.Scanner;

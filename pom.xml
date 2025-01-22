@@ -104,7 +104,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>org.kafkaApp.Metrics.newMetricsClass.MetricsUserInterface</mainClass>
+                                    <mainClass>org.kafkaApp.Metrics.MetricsUserInterface</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

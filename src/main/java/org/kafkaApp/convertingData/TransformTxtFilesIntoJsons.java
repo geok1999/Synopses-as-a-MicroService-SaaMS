@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class TransformTxtFilesIntoJsons {
     private static final Logger LOGGER = Logger.getLogger(TransformTxtFilesIntoJsons.class.getName());
-    private static final String filePath = System.getProperty("configFilePath", "C:\\dataset\\United Kingdom\\"); // Default path if not provided
+    private static final String filePath = System.getProperty("configFilePath", "C:\\dataset\\ForexStocksTest\\"); // Default path if not provided
 
     public static String processFile(File file) {
         String fileName = file.getName();
@@ -21,7 +21,7 @@ public class TransformTxtFilesIntoJsons {
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(file));
-             BufferedWriter bw = new BufferedWriter(new FileWriter( filePath + fileNameWithoutTheType))) {
+             BufferedWriter bw = new BufferedWriter(new FileWriter( filePath + fileNameWithoutTheType+ ".json"))) {
             String line;
             ObjectMapper objectMapper = new ObjectMapper();
             while ((line = br.readLine()) != null) {
