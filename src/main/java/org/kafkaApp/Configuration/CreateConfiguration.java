@@ -1,11 +1,9 @@
 package org.kafkaApp.Configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.streams.StreamsConfig;
 
 import java.util.Properties;
-import java.util.UUID;
 
 public class CreateConfiguration {
 

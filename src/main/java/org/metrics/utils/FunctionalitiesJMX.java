@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.utils;
+package org.metrics.utils;
 
 import javax.management.*;
 import javax.management.remote.JMXConnector;

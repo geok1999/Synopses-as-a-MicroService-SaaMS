@@ -1,9 +1,9 @@
-package org.kafkaApp.Metrics;
+package org.metrics;
 
-import org.kafkaApp.Metrics.collectorsJMX.CommunicationCostJMXMetrics;
-import org.kafkaApp.Metrics.collectorsJMX.JMXMetrics;
-import org.kafkaApp.Metrics.collectorsJMX.ThroughputJMXMetrics;
-import org.kafkaApp.Metrics.utils.ConfigMetrics;
+import org.metrics.collectorsJMX.CommunicationCostJMXMetrics;
+import org.metrics.collectorsJMX.JMXMetrics;
+import org.metrics.collectorsJMX.ThroughputJMXMetrics;
+import org.metrics.utils.ConfigMetrics;
 
 import java.util.Arrays;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package org.kafkaApp.InitProducer;
+package org.userInterface;
 
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
 
@@ -10,9 +10,9 @@ public class RunRequest {
         //the topic names
         String topicName2="Request_Topic";
 
-        //properties of the producer
-        Producer producer = new Producer();
+        //properties of the producerData
+        Producer producerData = new Producer();
 
-        producer.produceRequest(topicName2,RequestPath1);
+        producerData.produceRequest(topicName2,RequestPath1);
     }
 }

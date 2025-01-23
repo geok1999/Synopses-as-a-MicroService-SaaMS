@@ -1,4 +1,4 @@
-package org.kafkaApp.InitProducer.ProducerScript;
+package org.userInterface.ProducerScript;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.KafkaProducer;
