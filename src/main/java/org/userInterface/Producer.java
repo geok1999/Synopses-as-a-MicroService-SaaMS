@@ -1,10 +1,10 @@
-package org.kafkaApp.InitProducer;
+package org.userInterface;
 
 
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
-import org.kafkaApp.InitProducer.ProducerScript.ProducerDispatcher;
-import org.kafkaApp.InitProducer.ProducerScript.RealTimeProduceData;
+import org.userInterface.ProducerScript.ProducerDispatcher;
+import org.userInterface.ProducerScript.RealTimeProduceData;
 import org.kafkaApp.Serdes.Init.DataStructure.DataStructureSerializer;
 import org.kafkaApp.Serdes.Init.ListRequestStructure.ListRequestStructureSerializer;
 import org.kafkaApp.Structure.entities.RequestStructure;
@@ -93,9 +93,9 @@ public class Producer {
 
         //the topic names
         String topicName1="Data_Topic";
-        //properties of the producer
-        Producer producer = new Producer();
-        producer.produceData(topicName1,forexStocksNames);
+        //properties of the producerData
+        Producer producerData = new Producer();
+        producerData.produceData(topicName1,forexStocksNames);
 
 
     }

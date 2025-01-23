@@ -31,7 +31,13 @@
 9. [Contact](#contact)
 # SaaMS : Synopses as a Microservice
 ## Abstract
-In this work, we introduce a novel stream summary maintenance paradigm in the form of distributed microservices, namely Synopses as a MicroService, and we implement this paradigm on top of Apache Kafka and Kafka Streams Microservices. SaaMS is designed for real-time stream summarization and analysis over rapid data streams. SaaMS also contains a built-in library with Synopses that is used for producing stream summaries but remains extensible and customizable to new Synopses techniques. In that, (a) it contributes an innovative architecture to gain scalability dynamically based on the necessary computation requirements, (b) maintains a large volume of Synopses, concurrently with high throughput and fault-tolerance, (c) provides an extensible Synopsis library for real-time analysis (d) experimental evaluation provided using real financial data. SaaMS manages large-scale stream processing and analysis because it enables (i) horizontal scalability, i.e., taking advantage of complicated mechanisms that Kafka has for distributing the workload, achieving maximum throughput and minimum latency (ii) vertical scalability, i.e., the ability to scale the computation with the number of processed streams (iii) federated scalability, i.e., data can be processed across multiple distributed environments even in case they are geographically dispersed.
+The use of data synopses in Big streaming Data analytics can offer 3 types of scalability: (i) horizontal scalability, for scaling with the volume and velocity of Big streaming Data, (ii) vertical scalability,
+for scaling with the number of processed streams, and (iii) federated scalability, i.e. reducing
+the communication cost for performing global analytics across a number of geo-distributed data centers
+or devices in IoT settings. Despite the aforementioned virtues of synopses, no state-of-the-art Big Data framework or IoT platform
+provides a native API for stream synopses supporting all three types of required scalability. In this work, we
+fill this gap by introducing a novel system and architectural paradigm, namely  Synopses-as-a-MicroService (SaaMS), for both parallel and geo-distributed stream summarization at scale. SaaMS is developed on Apache Kafka and Kafka Streams and can provide all the required types of scalability together with (i) the ability to seamlessly perform adaptive resource allocation with zero downtime for the running analytics and (ii) the ability to run both across powerful computer clusters and Java-enabled IoT devices. Therefore, SaaMS is directly deployable from applications that either operate on powerful clouds or across the cloud to edge continuum.
+
 # Configuration SaaMS before execution:
 For the application to function properly, the following parameters must be set in the config.properties file. 
 
@@ -41,10 +47,10 @@ For the application to function properly, the following parameters must be set i
     BOOTSTRAP_SERVERS = localhost:9092,localhost:9093,localhost:9094
     
     # Determine the path for saving synopsis instance files
-    SAVE_FILE_PATH_PREFIX = C:\\dataset\\StoreSynopses\\stored_
+    SAVE_FILE_PATH_PREFIX = C:\\StoreSynopses\\stored_
     
     # Determine the path for saving Kafka Streams files
-    KAFKA_STREAM_DIR = C:\\dataset\\tmp\\kafka-streams\\
+    KAFKA_STREAM_DIR = C:\\tmp\\kafka-streams\\
     
     # Determine the Zookeeper server
     ZOOKEEPER_BOOTSTRAP_SERVERS = localhost:2181
@@ -59,8 +65,8 @@ For the application to function properly, the following parameters must be set i
     Batching_Time = 5
     # Determine the REQUEST_PATH and DATA_PATH
     # which is responsible for producing the request and data messages to Request and Data Kafka topics in SaaMS
-    REQUEST_TOPIC_PATH = C:\\Request_small.json
-    DATA_TOPIC_PATH = C:\\dataset\\ProduceDataToDataTopic
+    REQUEST_TOPIC_PATH = C:\\RequestExamples\\Request_small.json
+    DATA_TOPIC_PATH = C:\\DataExamples\\ProduceDataToDataTopic
     ```
 2. Following is an example of the config.properties file as must implement in case of running the application in a Linux environment.
     ```properties
@@ -68,10 +74,10 @@ For the application to function properly, the following parameters must be set i
     BOOTSTRAP_SERVERS = localhost:9092,localhost:9093,localhost:9094
     
     # Determine the path for saving synopsis instance files
-    SAVE_FILE_PATH_PREFIX = /home/user1/dataset/StoreSynopses/stored_
+    SAVE_FILE_PATH_PREFIX = /home/user1/StoreSynopses/stored_
     
     # Determine the path for saving Kafka Streams files
-    KAFKA_STREAM_DIR = /home/user1/dataset/tmp/kafka-streams/
+    KAFKA_STREAM_DIR = /home/user1/tmp/kafka-streams/
     
     # Determine the Zookeeper server
     ZOOKEEPER_BOOTSTRAP_SERVERS = localhost:2181
@@ -87,8 +93,8 @@ For the application to function properly, the following parameters must be set i
     
     # Determine the REQUEST_PATH and DATA_PATH
     # which is responsible for producing the request and data messages to Request and Data Kafka topics in SaaMS
-    REQUEST_TOPIC_PATH = /home/user1/Request_small.json
-    DATA_TOPIC_PATH = /home/user1/dataset/ProduceDataToDataTopic
+    REQUEST_TOPIC_PATH = /home/user1/RequestExamples/Request_small.json
+    DATA_TOPIC_PATH = /home/user1/DataExamples/ProduceDataToDataTopic
     ```
 3. In case of running the application in a cluster environment, the config.properties file must be set in all the nodes of the cluster.
 
@@ -238,40 +244,41 @@ mvn clean package
 ### Step 3: Run the SaaMS JAR
 #### Windows:
 ```bash
-java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
-```
-#### Linux:
-```bash
-java -DconfigFilePath=/home/dataset/Configuration/config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -DconfigFilePath=.\Configuration\config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
+#### Linux:
+```bash
+java -DconfigFilePath=./Configuration/config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+* The `-DconfigFilePath` isn't the exact path of the config.properties file, but it is an example. The user can set the path of the config.properties file according to the location of the file in the computer.
 ### Step 4: Run the User Interface JAR
 For producing messages to the Request and Data Kafka topics in SaaMS, the following commands must be executed:
 
 #### Produce messages to the Request Kafka Topic
 ##### Windows:
 ```bash
-java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Producing-TO-REQUEST-TOPIC-jar-with-dependencies.jar
+java -DconfigFilePath=.\Configuration\config.properties -jar target/Producing-TO-REQUEST-TOPIC-jar-with-dependencies.jar
 ```
 ##### Linux:
 ```bash
-java -DconfigFilePath=/home/dataset/Configuration/config.properties -jar target/Producing-TO-REQUEST-TOPIC-jar-with-dependencies.jar
+java -DconfigFilePath=./Configuration/config.properties -jar target/Producing-TO-REQUEST-TOPIC-jar-with-dependencies.jar
 ```
 
 #### Produce messages to the Data Kafka Topic
 ##### Windows:
 ```bash
-java -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
+java -DconfigFilePath=.\Configuration\config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
 ```
 ##### Linux:
 ```bash
-java -DconfigFilePath=/home/dataset/Configuration/config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
+java -DconfigFilePath=./Configuration/config.properties -jar target/Producing-TO-DATA-TOPIC-jar-with-dependencies.jar
 ```
 
-The `-DconfigFilePath` argument is optional, and the example file path `C:\dataset\Configuration\config.properties` (Windows) or `/home/dataset/Configuration/config.properties` (Linux) is provided for guidance. If it is not set, the application will use the default values to configure the app.
+The `-DconfigFilePath` argument is optional, and the example file path `.\Configuration\config.properties` (Windows) or `./Configuration/config.properties` (Linux) is provided for guidance. If it is not set, the application will use the default values to configure the app.
 
 # Annex 1: How to use transform data script
-The `transform_data.jar` is a Java application that can be used to transform a txt file to a JSON file. The JSON file can be used to produce data messages to the Data Kafka topic in SaaMS.
+The `Transform-TXT-Data-To-Json.jar` is a Java application that can be used to transform a CSV file to a JSON file. The JSON file can be used to produce data messages to the Data Kafka topic in SaaMS.
 
 ## Step 1: Must have a txt file with the following file name format:
 ```
@@ -287,14 +294,14 @@ This is necessary to extract:
 ## Step 3: Run the transform data script and provide the path of stock market where the txt file is located
 ### Windows:
 ```
-java -DconfigFilePath="C:\\custom\\dataset\\path\\" -jar target/Transform-TXT-Data-To-Json.jar 
+java -DconfigFilePath=.\DataExamples\Forex·EURTRY·NoExpiry.txt -jar target/Transform-TXT-Data-To-Json.jar 
 ```
 ### Linux:
 ```
-java -DconfigFilePath="/home/user1/dataset/path/" -jar target/Transform-TXT-Data-To-Json.jar 
+java -DconfigFilePath=./DataExamples/Forex·EURTRY·NoExpiry.txt -jar target/Transform-TXT-Data-To-Json.jar 
 ```
 
-# Annex 2: How to establish a Kafka Cluster and a Zookeeper Server which is necessary for execute SaaMS
+# Annex 2: How to establish a Kafka Cluster and a Zookeeper Server which is necessary to execute SaaMS
 In this project provides two methods to establish a Kafka Cluster and a Zookeeper Server:
 ## Method 1: Using a Script
 1. Download and install the Kafka and Zookeeper from the official website 
@@ -322,14 +329,14 @@ The Metrics User Interface is a Java application that used for implement metrics
 ### Step 1: Run the Metrics User Interface JAR
 #### Windows:
 ```
-java -DconfigMetricsFilePath=C:\dataset\Configuration\MetricsConfig.properties -jar target/Metrics-User-Interface.jar
+java -DconfigMetricsFilePath=.\Configuration\MetricsConfig.properties -jar target/Metrics-User-Interface.jar
 ```
 #### Linux:
 ```
-java -DconfigMetricsFilePath=/home/user1/dataset/Configuration/MetricsConfig.properties -jar target/Metrics-User-Interface.jar
+java -DconfigMetricsFilePath=./Configuration/MetricsConfig.properties -jar target/Metrics-User-Interface.jar
 ```
 
-The `-DconfigMetricsFilePath` argument is optional, and the example file path `C:\dataset\Configuration\MetricsConfig.properties` (Windows) or `/home/user1/dataset/Configuration/MetricsConfig.properties` (Linux) is provided for guidance. If it is not set, the application will use the default values to configure the app. 
+The `-DconfigMetricsFilePath` argument is optional, and the example file path `.\Configuration\MetricsConfig.properties` (Windows) or `./Configuration/MetricsConfig.properties` (Linux) is provided for guidance. If it is not set, the application will use the default values to configure the app. 
 
 
 ### Step 2: Options in the Metrics User Interface
@@ -368,7 +375,7 @@ The Metrics User Interface uses a configuration file (`MetricsConfig.properties`
 # The `JMX_URLS` is the URL of the JMX that the Metrics User Interface will connect to get the metrics
 JMX_URLS=service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi
 # The `OUTPUT_FILENAME` is the path where the metrics will be stored
-OUTPUT_FILENAME=C:\dataset\MetricsResults\test1
+OUTPUT_FILENAME=C:\MetricsResults\test1
 # The `PERIOD` is the time interval (in seconds) for fetching the metrics
 PERIOD=5
 #Enable the communication cost calculation
@@ -380,7 +387,7 @@ COMMUNICATION_COST_ENABLE=true
 # The `JMX_URLS` is the URL of the JMX that the Metrics User Interface will connect to get the metrics
 JMX_URLS=service:jmx:rmi:///jndi/rmi://localhost:9999/jmxrmi
 # The `OUTPUT_FILENAME` is the path where the metrics will be stored
-OUTPUT_FILENAME=/home/user1/dataset/MetricsResults/test1
+OUTPUT_FILENAME=/home/user1/MetricsResults/test1
 # The `PERIOD` is the time interval (in seconds) for fetching the metrics
 PERIOD=5
 #Enable the communication cost calculation
@@ -403,16 +410,15 @@ java -Dcom.sun.management.jmxremote \
      -Dcom.sun.management.jmxremote.port=9999 \
      -Dcom.sun.management.jmxremote.ssl=false \
      -Dcom.sun.management.jmxremote.authenticate=false \
-     -DconfigFilePath=C:\dataset\Configuration\config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
+     -DconfigFilePath=.\Configuration\config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
-
 ### Command for Linux:
 ```bash
 java -Dcom.sun.management.jmxremote \
      -Dcom.sun.management.jmxremote.port=9999 \
      -Dcom.sun.management.jmxremote.ssl=false \
      -Dcom.sun.management.jmxremote.authenticate=false \
-     -DconfigFilePath=/home/user1/dataset/Configuration/config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
+     -DconfigFilePath=./Configuration/config.properties -jar target/SaaMS_APP-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 # Contact

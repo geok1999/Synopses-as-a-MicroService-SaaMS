@@ -16,7 +16,7 @@ import org.apache.kafka.streams.state.KeyValueStore;
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.CreateTopic;
 import org.kafkaApp.Configuration.EnvironmentConfiguration;
-import org.kafkaApp.Metrics.utils.ConfigMetrics;
+import org.metrics.utils.ConfigMetrics;
 import org.kafkaApp.Microservices.SynopseMicroservice.GenericSynopsesMicroService;
 import org.kafkaApp.Microservices.SynopseMicroservice.RawDataMicroService;
 import org.kafkaApp.Partitioners.CustomGenericStreamPartitioner;

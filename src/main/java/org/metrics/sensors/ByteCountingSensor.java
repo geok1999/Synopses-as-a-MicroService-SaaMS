@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.sensors;
+package org.metrics.sensors;
 
 import org.apache.kafka.common.MetricName;
 import org.apache.kafka.common.metrics.Sensor;

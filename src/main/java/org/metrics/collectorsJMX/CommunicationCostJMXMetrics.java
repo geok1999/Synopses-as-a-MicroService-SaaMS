@@ -1,4 +1,4 @@
-package org.kafkaApp.Metrics.collectorsJMX;
+package org.metrics.collectorsJMX;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;

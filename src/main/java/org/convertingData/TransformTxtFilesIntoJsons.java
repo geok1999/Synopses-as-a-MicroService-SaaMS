@@ -1,4 +1,4 @@
-package org.kafkaApp.convertingData;
+package org.convertingData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.kafkaApp.Structure.entities.DataStructure;

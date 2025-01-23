@@ -1,4 +1,4 @@
-package org.kafkaApp.InitProducer.ProducerScript;
+package org.userInterface.ProducerScript;
 
 import org.kafkaApp.Configuration.CreateConfiguration;
 import org.kafkaApp.Configuration.CreateTopic;
